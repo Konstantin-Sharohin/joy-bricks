@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#logo {
+  height: 40px;
+  width: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar,
+.navElement {
+  display: flex;
+}
+
+.navElement {
+  align-items: center;
+}
+
+.navbar {
+  background-color: rgb(255, 255, 255);
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  color: rgb(89, 90, 163);
+  padding: 1em 2em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: rgb(57, 201, 65);
+  color: cornsilk;
+  transition-duration: .1s;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar a.toggle-icon {
+  display: flex;
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .row, .navbar {
+    flex-direction: column;
+  }
+
+  .navbar a:not(:first-child) {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+  }
+
+  .navbar a.toggle-icon {
+    position: relative;
+    visibility: visible;
+    justify-content: flex-end;
+    opacity: 1;
+  }
+
+  .navbar a.responsive {
+    position: relative;
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-10px);
+    transition-duration: 0.7s;
+    transition-property: transition-property, transform, opacity, visibility, position;
+  }
+}
+
+.active {
+  background-color: rgb(227, 236, 91);
+}
+
+.row,
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer {
+  justify-content: space-between;
+  padding: 1em 1em;
+  font-size: 0.8rem;
+}
+
+.categories {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 3em;
+}
+
+.intro {
+  flex: 70%;
+  background-color: white;
+  padding: 3em;
+}
