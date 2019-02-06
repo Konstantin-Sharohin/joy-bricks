@@ -18,12 +18,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* HEADER START */
 #logo {
   height: 40px;
   width: 40px;
 }
 
-/* Style the top navigation bar */
 .navbar,
 .navElement {
   display: flex;
@@ -37,7 +37,6 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-/* Style the navigation bar links */
 .navbar a {
   color: rgb(89, 90, 163);
   padding: 1em 2em;
@@ -45,7 +44,6 @@ body {
   font-weight: bold;
 }
 
-/* Change color on hover */
 .navbar a:hover {
   background-color: rgb(57, 201, 65);
   color: cornsilk;
@@ -65,7 +63,7 @@ body {
   opacity: 0;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 540px) {
   .row, .navbar {
     flex-direction: column;
   }
@@ -96,8 +94,9 @@ body {
 .active {
   background-color: rgb(227, 236, 91);
 }
+/* HEADER END */
 
-.row,
+/* FOOTER START */
 .footer {
   display: flex;
   flex-wrap: wrap;
@@ -108,15 +107,25 @@ body {
   padding: 1em 1em;
   font-size: 0.8rem;
 }
+/* FOOTER END */
+
+/* BODY START */
+.row, .categories, .intro {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .categories {
-  flex: 30%;
+  flex: 1 6 30%;
+  flex-direction: column;
   background-color: #f1f1f1;
   padding: 3em;
 }
 
 .intro {
-  flex: 70%;
+  flex: 3 1 40%;
+  flex-direction: column;
   background-color: white;
   padding: 3em;
 }
+/* BODY END */

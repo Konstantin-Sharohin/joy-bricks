@@ -5,12 +5,12 @@ DEFINE ('DB_PASSWORD', 'paradox');
 DEFINE ('DB_HOST', 'localhost');
 DEFINE ('DB_NAME', 'ecommerce1');
 
-$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$dbConnect = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-mysqli_set_charset($dbc, 'utf8');
+mysqli_set_charset($dbConnect, 'utf8');
 
-function escape_data($data, $dbc) {
+function escape_data($data, $dbConnect) {
 	if (get_magic_quotes_gpc())
 		$data = stripslashes($data);
-	return mysqli_real_escape_string ($dbc, trim ($data));
+	return mysqli_real_escape_string($dbConnect, trim($data));
 }

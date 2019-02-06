@@ -1,18 +1,18 @@
 <?php
-require 'includes\config.inc.php';
+	require 'includes/config.inc.php';
 
 /*$_SESSION['user_id'] = 1;
 $_SESSION['user_admin'] = true;
 $_SESSION['user_not_expired'] = true;
 $_SESSION=array();*/
 
-require MYSQL;
+	require MYSQL;
 
 /*if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-include('includes\login.inc.php');
+include('includes/login.inc.php');
 };*/
 
-require 'includes\header.html';
+	require 'includes/header.html';
 ?>
 
 <main class="row">
@@ -20,22 +20,24 @@ require 'includes\header.html';
 		<h3 class="success">Категории</h3>
 		<ul class="list">
 			<?php
-$query = 'SELECT * FROM categories ORDER BY category';
-$result = mysqli_query($dbc, $query);
-if (!$result) {
-	die('Invalid query: ' . mysqli_error());
-};
-while (list($id, $category) = mysqli_fetch_array($result, MYSQLI_NUM)) {
-echo "<li><a href=\"category.php?id= . $id . \" class=\"list\" title=\" . $category . \">" . htmlspecialchars($category) . '</a></li>';}
-?>
+			$query = 'SELECT * FROM categories ORDER BY category';
+			$result = mysqli_query($dbConnect, $query);
+			if (!$result) {
+				die('Invalid query: ' . mysqli_error());
+			};
+			while (list($id, $category) = mysqli_fetch_array($result, MYSQLI_NUM)) {
+				echo "<li><a href=\"category.php?id= . $id . \" class=\"list\" title=\" . $category . \">" . htmlspecialchars($category) . '</a></li>';
+			}
+			?>
 			<a href="pdfs.php" class="list" title="PDF">Конструкторы</a>
 		</ul>
 	</aside>
 
-	<?php
-if (!isset($_SESSION['user_id'])) {
-require('includes/login_form.inc.php');
-}?>
+	<!--<?php
+		if (!isset($_SESSION['user_id'])) {
+			require('includes/login_form.inc.php');
+		}
+	?>-->
 
 	<section class="intro">
 		<h1>Добро пожаловать</h1>
@@ -64,6 +66,7 @@ require('includes/login_form.inc.php');
 		</p>
 	</section>
 </main>
+
 <?php
-include 'includes/footer.html';
+	include 'includes/footer.html';
 ?>
