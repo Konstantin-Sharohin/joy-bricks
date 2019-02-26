@@ -4,25 +4,25 @@ if (!defined('LIVE')) DEFINE('LIVE', false);
 
 DEFINE('CONTACT_EMAIL', 'ksharohin@gmail.com');
 
-define ('BASE_URI', 'C:\xampp\htdocs\ecommerce1\\');
-define ('BASE_URL', 'localhost\ecommerce1\\');
-define ('PDFS_DIR', BASE_URI . 'pdfs\\');
-define ('MYSQL', BASE_URI . 'includes\mysql.inc.php');
+define ('BASE_URI', 'C:/xampp/htdocs/joy-bricks/');
+define ('BASE_URL', 'localhost/joy-bricks/');
+define ('PDFS_DIR', BASE_URI . 'pdfs/');
+define ('MYSQL', BASE_URI . 'includes/mysql.inc.php');
 
 session_start();
 
 function cust_error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
 
 	$message = "Ошибка произошла в сценарии '$e_file' в строке $e_line:\n$e_message\n";
-	$message .= "<pre>" .print_r(debug_backtrace(), true) . "</pre>\n";
-	//	$message .= "<pre>" . print_r ($e_vars, true) . "</pre>\n";
+	//$message .= "<pre>" .print_r(debug_backtrace(), true) . "</pre>\n";
+	$message .= "<pre>" . print_r ($e_vars, true) . "</pre>\n";
 
 	if (!LIVE) {
-		echo '<div class="alert alert-danger">' . nl2br($message) . '</div>';
+		echo '<div class="alert">' . nl2br($message) . '</div>';
 	} else {
-		error_log ($message, 1, CONTACT_EMAIL, 'От:admin@ecommerce1.com');
+		error_log ($message, 1, CONTACT_EMAIL, 'От:admin@joy-bricks.com');
 		if ($e_number != E_NOTICE) {
-			echo '<div class="alert alert-danger">Произошла системная ошибка. Приносим свои извинения за возможные неудобства.</div>';
+			echo '<div class="alert">Произошла системная ошибка. Приносим свои извинения за возможные неудобства.</div>';
 		}
 	}
 	return true;
@@ -39,7 +39,7 @@ function redirect_invalid_user($check = 'user_id', $destination = 'index.php', $
 		}
 	} else {
 			include_once('includes\header.html');
-			trigger_error('У вас нет разрешений на доступ к этой странице. Ч>Войдите на сайт и попробуйте еще раз.');
+			trigger_error('У вас нет разрешений на доступ к этой странице. Авторизируйтесь и попробуйте еще раз.');
 			include_once('includes\footer.html');
 			}
 }

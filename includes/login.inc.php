@@ -17,7 +17,7 @@ if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 if (empty($login_errors)) {
 
 	$query_login = "SELECT id, username, type, pass, IF(date_expires >= NOW(), true, false) AS expired FROM users WHERE email='$email'";
-	$response_login = mysqli_query($dbConnect, $query);
+	$response_login = mysqli_query($dbConnect, $query_login);
 
 	if (mysqli_num_rows($response) === 1) {
 		$row_login = mysqli_fetch_array($response_login, MYSQLI_ASSOC);

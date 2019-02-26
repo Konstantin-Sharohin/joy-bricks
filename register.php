@@ -9,13 +9,13 @@ $reg_errors = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-	if (preg_match('/^[A-Za-zА-Яа-я \'.-]{2,45}$/i', $_POST['first_name'])) {
+	if (preg_match('/^[A-Za-zА-Яа-я\'.-]{2,45}$/i', $_POST['first_name'])) {
 		$firstName = escape_data($_POST['first_name'], $dbConnect);
 	} else {
 		$reg_errors['first_name'] = 'Укажите свое имя';
 	};
 
-	if (preg_match('/^[A-Za-zА-Яа-я \'.-]{2,45}$/i', $_POST['last_name'])) {
+	if (preg_match('/^[A-Za-zА-Яа-я\'.-]{2,45}$/i', $_POST['last_name'])) {
 		$lastName = escape_data($_POST['last_name'], $dbConnect);
 	} else {
 		$reg_errors['last_name'] = 'Введите фамилию';
@@ -33,14 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$reg_errors['email'] = 'Укажите корректный адрес электронной почты';
 	};
 
-	if (preg_match('/^(\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*){6,}$/', $_POST['pass1']) ) {
-		if ($_POST['pass1'] === $_POST['pass2']) {
-			$password = $_POST['pass1'];
+	if (preg_match('/^(\w*(?=\w*\d)(?=\w*[a-zа-я])(?=\w*[A-ZА-Я])\w*){6,}$/', $_POST['password']) ) {
+		if ($_POST['password'] === $_POST['password_confirm']) {
+			$password = $_POST['password'];
 		} else {
-			$reg_errors['pass2'] = 'Пароли не совпадают';
+			$reg_errors['password_confirm'] = 'Пароли не совпадают';
 		}
 	} else {
-		$reg_errors['pass1'] = 'Введите корректный пароль';
+		$reg_errors['password'] = 'Введите корректный пароль';
 	};
 
 	if (empty($reg_errors)) {
@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$request = mysqli_query($dbConnect, $query);
 
 			if (mysqli_affected_rows($dbConnect) === 1) {
-				 $uid = mysqli_insert_id($dbConnect);
-				 $_SESSION['reg_user_id']  = $uid;
+				 $user_id = mysqli_insert_id($dbConnect);
+				 $_SESSION['reg_user_id']  = $user_id;
 				 echo '<div class="success"><h3>Спасибо за регистрацию!</h3><p>Чтобы завершить этот процесс, щелкните на отображенной внизу кнопке, чтобы оплатить доступ к сайту с помощью PayPal. Стоимость доступа составляет 10 долларов США по текущему курсу. <strong>Примечание. После завершения платежа в PayPal щелкните на соответствующей кнопке, чтобы вернуться на сайт.</strong></p></div>';
 				 echo '<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick">
@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					<input type="image" src="https://www.sandbox.paypal.com/ru_RU/RU/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal — безопасный и легкий способ оплаты в сети Интернет">
 					<img alt="" border="0" src="https://www.sandbox.paypal.com/ru_RU/i/scr/pixel.gif" width="1" height="1"></form>';
 
-				$body = "Спасибо за регистрацию.\n\n";
-				mail($_POST['email'], 'Подтверждение регистрации', $body, 'От: admin@joy-bricks.com');
+				//$body = "Спасибо за регистрацию.\n\n";
+				//mail($_POST['email'], 'Подтверждение регистрации', $body, 'От: admin@joy-bricks.com');
 
 				include('includes/footer.html');
 				exit();
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				trigger_error('Регистрация не завершена из-за системной ошибки. Приносим извинения за доставленные неудобства. Эта проблема будет устранена в ближайшее время');
 			}
 		} else {
-			if ($rows === 2 || $rows === 1) {
+			if ($rows === 2 || 1) {
 				$reply = 'Этот адрес электронной почты или имя пользователя уже зарегистрированы. Попробуйте воспользоваться другим именем пользователя. Если вы забыли пароль, щелкните на отображенной слева ссылке, чтобы получить новый пароль.';
 				$reg_errors['email'] = $reply;
 				$reg_errors['username'] = $reply;
@@ -83,28 +83,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 require_once('includes/form_functions.inc.php');
 ?>
+<main class="outer-container">
+	<div class="container">
+		<div class="home-title">Регистрация нового пользователя</div>
+		<div class="login-item">
+			<form action="register.php" method="post" class="form form-login">
+				<div class="form-field">
+					<input id="login-firstname" type="text" name="first_name" class="form-input" placeholder="Имя" title="От 2 до 45 букв">
+				</div>
 
-<div class="mainContent">
-	<h1>Регистрация</h1>
-	<p>
-		Доступ к контенту сайта на год за 10 долларов могут получить зарегистрированные пользователи. Для выполнения регистрации воспользуйтесь следующей формой. <strong>Примечание. Обязательно нужно ввести данные во все поля.</strong> После завершения ввода данных в поля формы вы сможете воспользоваться безопасным способом оплаты годовой подписки через <a href="http://www.paypal.com">PayPal</a>.
-	</p>
-	<form action="register.php" method="post" accept-charset="utf-8">
-		<?php
-			create_form_input('first_name', 'text', 'Имя', $reg_errors);
-			create_form_input('last_name', 'text', 'Фамилия', $reg_errors);
-			create_form_input('username', 'text', 'Логин', $reg_errors);
-				echo '<span class="help-block">Допускаются только буквы и цифры.</span>';
-			create_form_input('email', 'email', 'Адрес электронной почты', $reg_errors);
-			create_form_input('pass1', 'password', 'Пароль', $reg_errors);
-				echo '<span class="help-block">Минимальная длина - 6 символов (пароль должен включать минимум одну букву в верхнем регистре, одну букву в нижнем регистре и одну цифру).</span>';
-			create_form_input('pass2', 'password', 'Подтверждение пароля', $reg_errors);
-		?>
-		<input type="submit" name="submit_button" value="Далее &rarr;" id="submit_button" class="submit-btn" />
-	</form>
-	<br>
-</div>
+				<div class="form-field">
+					<input id="login-lastname" type="text" name="last_name"class="form-input" placeholder="Фамилия" title="От 2 до 45 букв" required>
+				</div>
 
+				<div class="form-field">
+					<input id="login-username" type="text" name="username" class="form-input" placeholder="Логин" title="От 2 до 24 символов (только цифры и буквы)" required>
+				</div>
+
+				<div class="form-field">
+					<input id="login-email" type="text" name="email" class="form-input" placeholder="Эл. почта" required>
+				</div>
+
+				<div class="form-field">
+					<input id="login-password" type="password" name="password" class="form-input" placeholder="Пароль" title="Не менее 1 строчной буквы, 1 прописной буквы, 1 цифры (всего не менее 6 символов)" required>
+				</div>
+
+				<div class="form-field">
+					<input id="login-password-confirm" type="password" name="password_confirm" class="form-input" placeholder="Повторный ввод пароля" required>
+				</div>
+
+				<div class="form-field">
+					<input type="submit" name="registration-submit-btn" value="Зарегистрироваться" class="registration-submit-btn">
+				</div>
+			</form>
+		</div>
+</main>
 <?php
 	include('includes/footer.html');
 ?>

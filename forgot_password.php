@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 require('includes/config.inc.php');
 
 require(MYSQL);
 
-$page_title = 'Забыли пароль?';
+$page_title = 'Восстановление пароля';
 include('includes/header.html');
 
 $pass_errors = array();
@@ -66,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		mysqli_stmt_execute($stmt);
 		if (mysqli_stmt_affected_rows($stmt) > 0) {
 			$url = 'https://' . BASE_URL . 'reset.php?t=' . $token;
-			$body = "Это сообщение электронной почты высылается в ответ на запрос сброса пароля, предназначенного для доступа к сайту 'Знание - сила'. Если Вы отправили этот запрос, щелкните на ссылке, чтобы получить доступ к своей учетной записи:
-$url
-Чтобы сбросить пароль, в течение 15 минут щелкните на ссылке. Если Вы не щелкнете на ссылке в течение 15 минут, придется снова запрашивать сброс пароля.
-Если Вы не запрашивали сброс пароля, игнорируйте это сообщение и продолжайте использовать текущий пароль.";
-			mail($email, 'Сброс пароля для сайта "Знание - сила"', $body, 'ОТ: ' . CONTACT_EMAIL);
+			$body = 'Это сообщение электронной почты высылается в ответ на запрос сброса пароля, предназначенного для доступа к веб-сайту Joy Bricks.
+			 Если Вы отправили этот запрос, щелкните на ссылке, чтобы получить доступ к своей учетной записи: ' . $url . '.' .
+			 'Чтобы сбросить пароль, в течение 15 минут щелкните на ссылке. В противном случае, Вам придется снова запрашивать сброс пароля.
+			Если Вы не запрашивали сброс пароля, игнорируйте это сообщение и продолжайте использовать текущий пароль.';
+			mail($email, 'Сброс пароля для веб-сайта Joy Bricks', $body, 'ОТ: ' . CONTACT_EMAIL);
 
 			echo '<h1>Сброс пароля</h1><p>Вы получили код доступа в сообщении электронной почты. Щелкните на ссылке в этом сообщении, чтобы получить доступ к сайту. После этого Вы сможете изменить пароль.</p>';
 			include('includes/footer.html');
@@ -85,15 +85,21 @@ $url
 	} // завершение конструкции empty($pass_errors) IF
 
 } // завершение основного условного выражения Submit
-
-require_once('includes/form_functions.inc.php');
-?><h1>Сброс пароля</h1>
-<p>Чтобы сбросить пароль, укажите Ваш адрес электронной почты.</p>
-<form action="forgot_password.php" method="post" accept-charset="utf-8">
-	<?php create_form_input('email', 'text', 'Адрес электронной почты', $pass_errors); ?>
-	<input type="submit" name="submit_button" value="Сброс &rarr;" id="submit_button" class="btn" />
-</form>
-
+?><main class="outer-container">
+	<div class="container">
+		<div class="restore-title">Чтобы сбросить пароль, укажите Ваш адрес электронной почты</div>
+		<div class="login-item">
+			<form action="forgot_password.php" method="post" accept-charset="utf-8" class="form form-login">
+				<div class="form-field">
+					<input id="login-email" type="text" name="email" class="form-input" placeholder="Эл. почта" required>
+				</div>
+				<div class="form-field">
+					<input id="submit_button" type="submit" name="submit_button" class="form-input" value="Сброс &rarr;"/>
+				</div>
+			</form>
+		</div>
+	</div>
+</main>
 <?php
 	include('includes/footer.html');
 ?>

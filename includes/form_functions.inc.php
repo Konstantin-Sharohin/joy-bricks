@@ -10,7 +10,7 @@ function create_form_input($name, $type, $label = '', $errors = array(), $option
 		$value = stripslashes($value);
 	};
 
-	echo '<div class="form-group';
+	echo '<div class="login-form';
 
 	if (array_key_exists($name, $errors)) {
 		echo ' has-error';
