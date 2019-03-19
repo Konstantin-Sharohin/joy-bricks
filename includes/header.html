@@ -82,20 +82,9 @@
 							<li><a href="change_password.php">Изменить пароль</a></li>
 						</ul>
 				</li>';
-
-			if (isset($_SESSION['user_admin'])) {
-			echo '<li class="dropdown">
-				<a href="#" class="dropdown">Администратор</a>
-				<ul class="dropdown-menu">
-					<li><a href="add_page.php">Добавить страницу</a></li>
-					<li><a href="add_pdf.php">Добавить PDF</a></li>
-					<li><a href="#">Другое действие</a></li>
-				</ul>
-				</li>';
-			}
 			}*/
 		?>
-		<a href="#" class="toggle-icon">
+		<a href="#" class="toggle-icon" id="switcher">
 			<i class="fas fa-angle-down"></i>
 		</a>
 		<a href="cart.php" class="cart-icon">

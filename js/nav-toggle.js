@@ -13,7 +13,7 @@
             };
             icon_container.addEventListener("click", toggle);
     } else if (document.attachEvent) {
-        var icon_container = document.getElementsByClassName(".toggle-icon"),
+        var icon_container = document.getElementById("#switcher"),
             navElements = document.getElementsByClassName(".nav-element-link, .cart-icon"),
         toggle = function(event) {
             event.returnValue = false;
