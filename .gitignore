@@ -14,7 +14,7 @@
 /build
 
 # misc
-Ecommerce1.code-workspace
+.code-workspace
 .DS_Store
 .env.local
 .env.development.local

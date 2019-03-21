@@ -29,7 +29,7 @@ function cust_error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
 
 set_error_handler('cust_error_handler');
 
-function redirect_invalid_user($check = 'user_id', $destination = 'index.php', $protocol = 'http://') {
+/*function redirect_invalid_user($check = 'user_id', $destination = 'index.php', $protocol = 'http://') {
 	if (!headers_sent()) {
 		if (!isset($_SESSION[$check])) {
 			$url = $protocol . BASE_URL . $destination;
@@ -41,4 +41,4 @@ function redirect_invalid_user($check = 'user_id', $destination = 'index.php', $
 			trigger_error('У вас нет разрешений на доступ к этой странице. Авторизируйтесь и попробуйте еще раз.');
 			include_once('includes\footer.html');
 			}
-}
+}*/

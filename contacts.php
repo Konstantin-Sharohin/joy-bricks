@@ -7,7 +7,7 @@ if(isset($_POST['send'])) {
 	$no_spam1 = $_POST['no_spam1'];
 	$no_spam2 = $_POST['no_spam2'];
 	$subject = 'Форма отправки сообщений';
-	$to = 'info@joy-bricks.co.ua';
+	$to = require CONTACT_EMAIL;
 	$headers = "From: kos@localhost\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=UTF-8\r\n";
@@ -52,8 +52,8 @@ echo 'Собщение отправлено';
 				<p><textarea name="reply-text" placeholder="Ваше сообщение" required></textarea></p>
 				<input name="no_spam1" type="text" style="display:none" value=""/>
 				<p>
-					<label for="hidden"><span class="number1">2</span> <span class="plus">+</span> <span class="number2">7</span> = </label>
-					<input name="no_spam2" id="hidden" type="text" placeholder="Введите результат" required/>
+					<label for="check"><div class="numbers"><img src="./images/check.jpg" width="150px" height="50px"></div></label>
+					<input name="no_spam2" id="check" type="text" placeholder="Введите результат" required/>
 				</p>
 				<p><button type="submit" name="send" class="send-reply">Отправить</button></p>
 			</form>
