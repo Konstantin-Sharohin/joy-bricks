@@ -22,5 +22,5 @@
                 icon.className = icon.className == "fas fa-angle-down" ? "fas fa-angle-up" : "fas fa-angle-down";
             };
         icon_container.attachEvent("onclick", toggle);
-    }
+    };
 })();

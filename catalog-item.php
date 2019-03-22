@@ -1,9 +1,9 @@
 <?php
 	require 'includes/config.inc.php';
 	require MYSQL;
+	$page_title = '';
 	require 'includes/header.html';
 ?>
-
 <main class="row">
 	<aside class="categories">
 	<div class="categories-container">
@@ -14,9 +14,9 @@
 			$result_all_categories = mysqli_query($dbConnect, $query_all_categories);
 
 			if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-				$cat_id = $_GET['id'];
-			$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE category_id = ' . $cat_id . ' ORDER BY id';
-			$result_some_products = mysqli_query($dbConnect, $query_some_products);
+				$prod_id = $_GET['id'];
+			$query_one_product = 'SELECT title, category, `description`, photo, price, code FROM products WHERE id = ' . $prod_id . '';
+			$result_one_product = mysqli_query($dbConnect, $query_one_product);
 
 			if (!$query_all_categories) {
 				die('Invalid query: ' . mysqli_error());
@@ -31,18 +31,15 @@
 	</aside>
 	<section class="intro">
 		<?php
-			if (!$result_some_products) {
+			if (!$result_one_product) {
 				die('Invalid query: ' . mysqli_error());
 			};
 			echo '<div class="catalog-container">';
-			while (list($id, $title, $category, $photo, $price, $code) = mysqli_fetch_array($result_some_products, MYSQLI_NUM)) {
+			while (list($title, $category, $description, $photo, $price, $code) = mysqli_fetch_array($result_one_product, MYSQLI_NUM)) {
 				echo '<div class="catalog-item">
-								<a href="catalog-item.php?id=' . $id . '" class="catalog-item-link" title="' . $title . '">
+								<a class="catalog-item-link" title="' . $title . '">
 									<div class="catalog-item-image">
 										<img src="images/' . $photo . '.jpg" alt="catalog item" class="item-image">
-									</div>
-									<div class="catalog-item-name">
-										<span><h4>' . $title . '</h4></span>
 									</div>
 									<div class="catalog-item-price">
 										<span class="item-price">' . $price . ' грн</span>
@@ -52,12 +49,20 @@
 									</div>
 								</a>
 								<div class="add-cart-icon" title="Добавить в корзину">
-								<span class="add-cart-symbol">
-									<i class="fas fa-cart-arrow-down"></i>
-								</span>
-							</div>
-							</div>';
-			}
+									<span class="add-cart-symbol">
+										<i class="fas fa-cart-arrow-down"></i>
+									</span>
+								</div>
+						</div>';
+
+			echo '<div class="payment-container">
+						<h2 class="payment-title">' . $title . '</h2>
+						<div class="payment-note">
+							<p>' . $description . '</p>
+						</div>
+				</div>';
+			};
+
 			echo '<button class="return-to-top-btn" title="Вернуться наверх">
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>

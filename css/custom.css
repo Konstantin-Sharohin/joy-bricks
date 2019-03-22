@@ -178,12 +178,12 @@ a.cart-icon span::before {
   position: absolute;
   left: 35px;
   content: attr(data-counter);
-  color: rgb(255, 165, 0);
+  color: rgb(231, 225, 213);
   font-size: 0.5em;
 }
 
 a.cart-icon span:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(101, 203, 206);
 }
 /* HEADER CART ICON END */
 /* HEADER END */
@@ -415,6 +415,11 @@ div.add-cart-icon span:hover {
   color: rgb(101, 203, 206);
   cursor: pointer;
   transition-duration: 0.4s;
+}
+
+div.add-cart-icon i:active {
+  transform: scale(1.2);
+  transition-duration: 0.1s;
 }
 /* ITEM CART ICON END */
 /* INDEX BODY END */
