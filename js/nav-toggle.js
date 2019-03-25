@@ -1,6 +1,6 @@
 (function () {
     if (document.addEventListener) {
-        const icon_container = document.querySelector(".toggle-icon"),
+        let icon_container = document.querySelector(".toggle-icon"),
             icon = document.querySelector(".toggle-icon i"),
             navElements = document.querySelectorAll(".nav-element-link, .cart-icon"),
             toggle = (event) => {

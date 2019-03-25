@@ -62,7 +62,7 @@ include('includes/login.inc.php');
 							</a>
 							<div class="add-cart-icon" title="Добавить в корзину">
 								<span class="add-cart-symbol">
-									<i class="fas fa-cart-arrow-down"></i>
+									<i class="fas fa-cart-arrow-down" data-action="0"></i>
 								</span>
 							</div>
 					</div>';
@@ -75,6 +75,8 @@ include('includes/login.inc.php');
 
 		?>
 	</section>
+	<script src="js/return-top-btn.js"></script>
+	<script src="js/add-to-cart.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

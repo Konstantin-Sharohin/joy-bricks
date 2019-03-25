@@ -6,10 +6,10 @@
 ?>
 <main class="row">
 	<aside class="categories">
-	<div class="categories-container">
-	<h3 class="categories-title">Категории</h3>
-		<ul class="list">
-			<?php
+		<div class="categories-container">
+			<h3 class="categories-title">Категории</h3>
+			<ul class="list">
+				<?php
 			$query_all_categories = 'SELECT * FROM categories ORDER BY category';
 			$result_all_categories = mysqli_query($dbConnect, $query_all_categories);
 
@@ -26,8 +26,8 @@
 			};
 		};
 			?>
-		</ul>
-	</div>
+			</ul>
+		</div>
 	</aside>
 	<section class="intro">
 		<?php
@@ -36,7 +36,10 @@
 			};
 			echo '<div class="catalog-container">';
 			while (list($title, $category, $description, $photo, $price, $code) = mysqli_fetch_array($result_one_product, MYSQLI_NUM)) {
-				echo '<div class="catalog-item">
+			echo '<div class="item-container">
+						<h2 class="item-title">' . $title . '</h2>
+						<div class="item-inner-container">
+						<div class="catalog-single-item">
 								<a class="catalog-item-link" title="' . $title . '">
 									<div class="catalog-item-image">
 										<img src="images/' . $photo . '.jpg" alt="catalog item" class="item-image">
@@ -50,15 +53,13 @@
 								</a>
 								<div class="add-cart-icon" title="Добавить в корзину">
 									<span class="add-cart-symbol">
-										<i class="fas fa-cart-arrow-down"></i>
+										<i class="fas fa-cart-arrow-down" data-action="0"></i>
 									</span>
 								</div>
-						</div>';
-
-			echo '<div class="payment-container">
-						<h2 class="payment-title">' . $title . '</h2>
-						<div class="payment-note">
+						</div>
+						<div class="item-description">
 							<p>' . $description . '</p>
+						</div>
 						</div>
 				</div>';
 			};
@@ -67,9 +68,12 @@
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>
 					</span>
-				</button></div>';
+				</button>
+			</div>';
 		?>
 	</section>
+	<script src="js/return-top-btn.js"></script>
+	<script src="js/add-to-cart.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

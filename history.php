@@ -88,6 +88,16 @@
                 class="history-images" /><br>
         </article>
     </div>
+    <?php
+	echo '<button class="return-to-top-btn" title="Вернуться наверх">
+					<span class="up-symbol">
+						<i class="fas fa-angle-double-up"></i>
+					</span>
+				</button></div>';
+
+		?>
+    <script src="js/return-top-btn.js"></script>
+    <script src="js/add-to-cart.js"></script>
 </main>
 <?php
 	include('includes/footer.html');
