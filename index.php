@@ -62,7 +62,7 @@ include('includes/login.inc.php');
 							</a>
 							<div class="add-cart-icon" title="Добавить в корзину">
 								<span class="add-cart-symbol">
-									<i class="fas fa-cart-arrow-down" data-action="0"></i>
+									<i class="fas fa-cart-arrow-down" data-action="0" data-action-code="' . $id . '"></i>
 								</span>
 							</div>
 					</div>';
