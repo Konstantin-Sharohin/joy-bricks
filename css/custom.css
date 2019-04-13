@@ -789,7 +789,7 @@ textarea {
 .cart-page-item-container {
   display: inherit;
   flex-direction: column;
-  justify-content: center;
+  justify-content: stretch;
   align-items: center;
   width: 100%;
   font-weight: bold;

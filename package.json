@@ -1,0 +1,23 @@
+{
+  "name": "joy-bricks",
+  "version": "1.0.0",
+  "description": "pet project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Konstantin-Sharohin/joy-bricks.git"
+  },
+  "keywords": [],
+  "author": "Konstantin Sharohin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Konstantin-Sharohin/joy-bricks/issues"
+  },
+  "homepage": "https://github.com/Konstantin-Sharohin/joy-bricks#readme",
+  "dependencies": {
+    "mustache": "^3.0.1"
+  }
+}
