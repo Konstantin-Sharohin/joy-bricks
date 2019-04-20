@@ -10,7 +10,54 @@
 	<h1 class="cart-page-main-title">Корзина</h1>
 	<div class="cart-page-inner-container">
 		<h2 class="cart-page-title">Выбраные конструкторы</h2>
+		<div class="limiter">
 		<div class="container-table">
+			<div class="wrap-table">
+					<div class="table">
+
+						<div class="row header">
+							<div class="cell">
+								Наименование
+							</div>
+							<div class="cell">
+								Количество (шт.)
+							</div>
+							<div class="cell">
+								Цена (за шт.)
+							</div>
+						</div>
+
+						<div class="row header total-header">
+							<div class="cell">
+								Итого
+							</div>
+							<div class="cell">
+
+							</div>
+							<div class="cell">
+
+							</div>
+						</div>
+
+						<div class="row total-row">
+							<!-- <div class="cell">
+
+							</div> -->
+							<div class="cell">
+
+							</div>
+							<div class="cell">
+
+							</div>
+						</div>
+
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+		<!-- <div class="container-table">
 			<div class="table">
 				<div class="table-row header">
 					<div class="cell">
@@ -24,32 +71,12 @@
 					</div>
 				</div>
 
-				<div class="table-row">
-					<div class="cell" data-title="Наименование">
-						Ninja Saga
-					</div>
-					<div class="cell" data-title="Количество (шт.)">
-						1
-					</div>
-					<div class="cell" data-title="Цена (за шт.)">
-						200 грн
-					</div>
+				<div class="table-row content">
 				</div>
 
-				<div class="table-row">
-					<div class="cell" data-title="Наименование">
-						Ninja 2
-					</div>
-					<div class="cell" data-title="Количество (шт.)">
-						1
-					</div>
-					<div class="cell" data-title="Цена (за шт.)">
-						300 грн
-					</div>
-				</div>
 			</div>
 
-			<div class="table total">
+			<div class="table-row total">
 				<div class="table-row header total">
 					<div class="cell">
 						Итого
@@ -57,12 +84,9 @@
 				</div>
 
 				<div class="table-row total">
-					<div class="cell" data-title="Итого">
-						500 грн
-					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 
