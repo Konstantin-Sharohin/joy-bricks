@@ -4,7 +4,7 @@
 	require 'includes/header.html';
 ?>
 
-<main class="row">
+<main class="main-container">
 	<aside class="categories">
 	<div class="categories-container">
 	<h3 class="categories-title">Категории</h3>
@@ -13,16 +13,17 @@
 			$query_all_categories = 'SELECT * FROM categories ORDER BY category';
 			$result_all_categories = mysqli_query($dbConnect, $query_all_categories);
 
+			if (!$result_all_categories) {
+				die('Invalid query: ' . mysqli_error());
+			};
+
 			if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
 				$cat_id = $_GET['id'];
 			$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE category_id = ' . $cat_id . ' ORDER BY id';
 			$result_some_products = mysqli_query($dbConnect, $query_some_products);
 
-			if (!$query_all_categories) {
-				die('Invalid query: ' . mysqli_error());
-			};
 			while (list($id, $category) = mysqli_fetch_array($result_all_categories, MYSQLI_NUM)) {
-				echo '<li><a href="category.php?id=' . $id . '" class="list" title="' . $category . '">' . htmlspecialchars($category) . '</a></li>';
+				echo '<li><a href="category.php?id=' . $id . '" class="list" title="' . $category . '">' . $category . '</a></li>';
 			};
 		};
 			?>
@@ -52,17 +53,18 @@
 									</div>
 								</a>
 								<div class="add-cart-icon" title="Добавить в корзину">
-								<span class="add-cart-symbol">
-									<i class="fas fa-cart-arrow-down" data-action="0"></i>
-								</span>
-							</div>
-							</div>';
+									<span class="add-cart-symbol">
+										<i class="fas fa-cart-arrow-down" data-action="0"></i>
+									</span>
+								</div>
+						</div>
+					</div>';
 			}
 			echo '<button class="return-to-top-btn" title="Вернуться наверх">
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>
 					</span>
-				</button></div>';
+				</button>';
 		?>
 	</section>
 	<script src="js/return-top-btn.js"></script>

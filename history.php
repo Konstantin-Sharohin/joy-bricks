@@ -93,7 +93,7 @@
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>
 					</span>
-				</button></div>';
+			</button>';
 
 		?>
     <script src="js/return-top-btn.js"></script>

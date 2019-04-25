@@ -15,7 +15,7 @@ include('includes/login.inc.php');
 	require 'includes/header.html';
 ?>
 
-<main class="row">
+<main class="main-container">
 	<aside class="categories">
 	<div class="categories-container">
 	<h3 class="categories-title">Категории</h3>
@@ -65,14 +65,14 @@ include('includes/login.inc.php');
 									<i class="fas fa-cart-arrow-down" data-action="0" data-action-code="' . $id . '"></i>
 								</span>
 							</div>
-					</div>';
+						</div>';
 			}
+			echo '</div>';
 			echo '<button class="return-to-top-btn" title="Вернуться наверх">
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>
 					</span>
-				</button></div>';
-
+				</button>';
 		?>
 	</section>
 	<script src="js/return-top-btn.js"></script>

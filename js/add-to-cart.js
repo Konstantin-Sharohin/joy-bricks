@@ -25,12 +25,12 @@
         if (selectedIconClass == "fas fa-cart-arrow-down") {
             let target = event.target,
                 current_item_container = target.parentNode.parentNode.parentNode;
-            current_action.action_code = current_item_container.querySelector('span i').getAttribute('data-action-code');
-            current_cart.title = current_item_container.querySelector('a').getAttribute('title');
-            current_cart.photo = current_item_container.querySelector('img').getAttribute('src');
-            current_cart.price = current_item_container.querySelector('.item-price').textContent;
-            current_cart.code = current_item_container.querySelector('.item-code').textContent;
-            current_cart.quantity = 0;
+                current_action.action_code = current_item_container.querySelector('span i').getAttribute('data-action-code');
+                current_cart.title = current_item_container.querySelector('a').getAttribute('title');
+                current_cart.photo = current_item_container.querySelector('img').getAttribute('src');
+                current_cart.price = current_item_container.querySelector('.item-price').textContent;
+                current_cart.code = current_item_container.querySelector('.item-code').textContent;
+                current_cart.quantity = 0;
 
             if (target.dataset.action == "0") {
                 current_action.action = target.dataset.action = "1";

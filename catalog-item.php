@@ -4,7 +4,7 @@
 	$page_title = '';
 	require 'includes/header.html';
 ?>
-<main class="row">
+<main class="main-container">
 	<aside class="categories">
 		<div class="categories-container">
 			<h3 class="categories-title">Категории</h3>
@@ -39,7 +39,7 @@
 			echo '<div class="item-container">
 						<h2 class="item-title">' . $title . '</h2>
 						<div class="item-inner-container">
-						<div class="catalog-single-item">
+							<div class="catalog-single-item">
 								<a class="catalog-item-link" title="' . $title . '">
 									<div class="catalog-item-image">
 										<img src="images/' . $photo . '.jpg" alt="catalog item" class="item-image">
@@ -56,20 +56,19 @@
 										<i class="fas fa-cart-arrow-down" data-action="0"></i>
 									</span>
 								</div>
-						</div>
-						<div class="item-description">
-							<p>' . $description . '</p>
-						</div>
+							</div>
+							<div class="item-description">
+								<p>' . $description . '</p>
+							</div>
 						</div>
 				</div>';
 			};
 
 			echo '<button class="return-to-top-btn" title="Вернуться наверх">
-					<span class="up-symbol">
-						<i class="fas fa-angle-double-up"></i>
-					</span>
-				</button>
-			</div>';
+						<span class="up-symbol">
+							<i class="fas fa-angle-double-up"></i>
+						</span>
+				</button>';
 		?>
 	</section>
 	<script src="js/return-top-btn.js"></script>

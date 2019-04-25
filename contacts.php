@@ -20,7 +20,7 @@ echo 'Ошибка при отправке почты: ',  $e->getMessage(), "\n
 }
 echo 'Собщение отправлено';
 } else {
-	echo 'Ошибка заполнения';
+	echo 'Ошибка заполнения формы';
 }
 };
 	require('includes/config.inc.php');
@@ -56,14 +56,14 @@ echo 'Собщение отправлено';
 					<input name="no_spam2" id="check" type="text" placeholder="Введите результат" required/>
 				</p>
 				<p><button type="submit" name="send" class="send-reply">Отправить</button></p>
-			</form>
+		</form>
 	</div>
 	<?php
 	echo '<button class="return-to-top-btn" title="Вернуться наверх">
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>
 					</span>
-				</button></div>';
+			</button>';
 
 		?>
 	<script src="js/return-top-btn.js"></script>
