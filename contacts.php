@@ -1,4 +1,6 @@
 <?php
+require('includes/config.inc.php');
+
 if(isset($_POST['send'])) {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
@@ -23,9 +25,9 @@ echo 'Собщение отправлено';
 	echo 'Ошибка заполнения формы';
 }
 };
-	require('includes/config.inc.php');
 
 	$page_title = 'Контакты';
+
 	include('includes/header.html');
 ?>
 <main class="contacts-container">

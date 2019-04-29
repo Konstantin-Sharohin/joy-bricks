@@ -1,6 +1,5 @@
 <?php
 	require('includes/config.inc.php');
-	require(MYSQL);
 
 	$page_title = 'Корзина';
 	include('includes/header.html');
@@ -46,6 +45,18 @@
 							</div>
 						</div>
 
+						<div class="row send">
+							<div class="cell">
+
+							</div>
+							<div class="cell">
+
+							</div>
+							<div class="cell">
+								<input type="button" name="send_cart" class="cart-submit-btn" value="Оформить заказ">
+							</div>
+						</div>
+
 					</div>
 			</div>
 		</div>
@@ -58,8 +69,8 @@
 					</span>
 				</button>';
 		?>
-	<script src="js/return-top-btn.js"></script>
 </main>
+<script src="js/return-top-btn.js"></script>
 <script src="js/fill-in-cart-page.js"></script>
 <script src="js/cart-item-quantity.js"></script>
 <?php

@@ -1,9 +1,8 @@
 ﻿<?php
 
-if (!defined('LIVE')) DEFINE('LIVE', false);
+if (!defined('LIVE')) define ('LIVE', false);
 
-DEFINE('CONTACT_EMAIL', 'info@joy-bricks.co.ua');
-
+define ('CONTACT_EMAIL', 'info@joy-bricks.co.ua');
 define ('BASE_URI', 'C:/xampp/htdocs/joy-bricks/');
 define ('BASE_URL', 'localhost/joy-bricks/');
 define ('MYSQL', BASE_URI . 'includes/mysql.inc.php');
