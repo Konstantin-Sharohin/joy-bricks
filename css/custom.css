@@ -436,10 +436,9 @@ div.add-cart-icon span:hover {
   display: flex;
   flex-direction: column;
   margin: 2em 1em;
-  border: solid 3px lightblue;
   border-radius: 20px;
   padding: 1em;
-  background-color: rgb(193, 218, 105);
+  background-color: var(--grey);
 }
 
 .item-title {
@@ -454,7 +453,7 @@ div.add-cart-icon span:hover {
 .item-description p {
   font-style: italic;
   font-weight: 600;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .catalog-single-item {
@@ -674,28 +673,6 @@ address p:nth-child(2) i {
   border: none;
   text-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
   box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
-}
-
-.number1, .number2, .plus {
-  text-shadow: none;
-  font-size: 2rem;
-}
-
-.number1 {
-  color: rgb(45, 187, 206);
-}
-
-.number2 {
-  color: rgb(36, 212, 45);
-}
-
-textarea {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-
-  width: 100%;
-  height: 100px;
 }
 /* CONTACTS FORM END */
 /* CONTACTS END */
@@ -1039,6 +1016,71 @@ textarea {
 }
 /*CART TABLE END */
 /* CART PAGE END */
+
+/* ORDER CART SUBMIT START */
+.order-submit-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-submit-main-title {
+  color: green;
+}
+
+.order-submit-inner-container {
+  display: inherit;
+  flex-direction: column;
+  min-width: 400px;
+  border: solid 3px var(--grey);
+  border-radius: 20px;
+  justify-content: center;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+.order-submit-inner-container h2 {
+  text-align: center;
+}
+
+.order-form {
+  margin: 0 auto;
+}
+
+.order-form input {
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 250px;
+}
+
+.order-form p:first-child {
+  font-size: 1.2rem;
+  color: rgb(123, 151, 228);
+}
+
+.order-form p button {
+  padding: 0.6rem;
+  border-radius: 10px;
+  float: right;
+  background-color: rgb(154, 131, 235);
+  color: white;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+.cart-summary-header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-evenly;
+}
+/* ORDER CART SUBMIT END */
 
 /* DELIVERY & PAYMENT START */
 .delivery-payment-container {

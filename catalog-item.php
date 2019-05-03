@@ -18,9 +18,14 @@
 			$query_one_product = 'SELECT title, category, `description`, photo, price, code FROM products WHERE id = ' . $prod_id . '';
 			$result_one_product = mysqli_query($dbConnect, $query_one_product);
 
-			if (!$query_all_categories) {
-				die('Invalid query: ' . mysqli_error());
+			if (!$result_all_categories) {
+				die('Invalid query: ' . mysqli_error($result_all_categories));
 			};
+
+			if (!$result_one_product) {
+				die('Invalid query: ' . mysqli_error($result_one_product));
+			};
+
 			while (list($id, $category) = mysqli_fetch_array($result_all_categories, MYSQLI_NUM)) {
 				echo '<li><a href="category.php?id=' . $id . '" class="list" title="' . $category . '">' . htmlspecialchars($category) . '</a></li>';
 			};
@@ -32,7 +37,7 @@
 	<section class="intro">
 		<?php
 			if (!$result_one_product) {
-				die('Invalid query: ' . mysqli_error());
+				die('Invalid query: ' . mysqli_error($result_one_product));
 			};
 			echo '<div class="catalog-container">';
 			while (list($title, $category, $description, $photo, $price, $code) = mysqli_fetch_array($result_one_product, MYSQLI_NUM)) {
@@ -53,7 +58,7 @@
 								</a>
 								<div class="add-cart-icon" title="Добавить в корзину">
 									<span class="add-cart-symbol">
-										<i class="fas fa-cart-arrow-down" data-action="0"></i>
+										<i class="fas fa-cart-arrow-down" data-action=0 data-quantity=0></i>
 									</span>
 								</div>
 							</div>
@@ -64,7 +69,8 @@
 				</div>';
 			};
 
-			echo '<button class="return-to-top-btn" title="Вернуться наверх">
+			echo '</div>
+				<button class="return-to-top-btn" title="Вернуться наверх">
 						<span class="up-symbol">
 							<i class="fas fa-angle-double-up"></i>
 						</span>

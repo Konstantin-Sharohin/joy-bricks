@@ -41,7 +41,7 @@ include('includes/login.inc.php');
 	<section class="intro">
 		<?php
 			if (!$result_all_products) {
-				die('Invalid query: ' . mysqli_error());
+				die('Invalid query: ' . mysqli_error($result_all_products));
 			};
 			echo '<div class="catalog-container">';
 			while (list($id, $title, $category, $photo, $price, $code) = mysqli_fetch_array($result_all_products, MYSQLI_NUM)) {
@@ -62,7 +62,7 @@ include('includes/login.inc.php');
 							</a>
 							<div class="add-cart-icon" title="Добавить в корзину">
 								<span class="add-cart-symbol">
-									<i class="fas fa-cart-arrow-down" data-action="0"></i>
+									<i class="fas fa-cart-arrow-down" data-action=0 data-quantity=0></i>
 								</span>
 							</div>
 						</div>';

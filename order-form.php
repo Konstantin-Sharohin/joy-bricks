@@ -4,10 +4,10 @@
 	$page_title = 'Форма заказа';
 	include('includes/header.html');
 ?>
-<main class="cart-page-container">
-	<h1 class="cart-page-main-title">Форма заказа</h1>
-	<div class="cart-page-inner-container">
-		<h2>Ваши данные</h2>
+<main class="order-submit-container">
+	<h1 class="order-submit-main-title">Форма заказа</h1>
+	<div class="order-submit-inner-container">
+		<h2>Введите Ваши данные</h2>
 		<form action="order-form.php" method="post" class="order-form">
 			<p><input type="text" name="name" placeholder="Ваше имя" required></p>
 			<p><input type="text" name="name" placeholder="Ваша фамилия" required></p>
@@ -21,20 +21,14 @@
 				</label>
 				<input name="no_spam2" id="check" type="text" placeholder="Введите результат" required />
 			</p>
-			<p><button type="submit" name="order-form-btn" class="order-form-btn">Отправить</button></p>
 		</form>
 
+		<h2>Ваш заказ</h2>
 		<div class="cart-summary-header">
 			<p class="cart-summary-header-title">Наименование</p>
 			<p class="cart-summary-header-quantity">Количество (шт.)</p>
 			<p class="cart-summary-header-price">Цена (за шт.)</p>
 		</div>
-		<div class="cart-summary">
-				<p class="cart-summary-title"></p>
-				<p class="cart-summary-quantity"></p>
-				<p class="cart-summary-price"></p>
-			</div>
-
 
 	</div>
 
@@ -45,8 +39,9 @@
 					</span>
 				</button>';
 		?>
-	<!-- <script src="js/return-top-btn.js"></script> -->
 </main>
+<script src="js/return-top-btn.js"></script>
+<script src="js/cart_submit.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

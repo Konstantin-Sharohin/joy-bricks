@@ -45,7 +45,7 @@
 							</div>
 						</div>
 
-						<div class="row send">
+						<div class="row order">
 							<div class="cell">
 
 							</div>
@@ -53,7 +53,9 @@
 
 							</div>
 							<div class="cell">
-								<input type="button" name="send_cart" class="cart-submit-btn" value="Оформить заказ">
+								<a href="order-form.php">
+									<button class="cart-submit-btn">Оформить заказ</button>
+								</a>
 							</div>
 						</div>
 
@@ -71,8 +73,8 @@
 		?>
 </main>
 <script src="js/return-top-btn.js"></script>
-<script src="js/fill-in-cart-page.js"></script>
-<script src="js/cart-item-quantity.js"></script>
+<script src="js/create-cart-page.js"></script>
+<script src="js/cart-page-functionality.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

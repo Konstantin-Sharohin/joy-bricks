@@ -5,8 +5,14 @@
                 scroll_btn.style.display = (document.body.scrollTop > 850 || document.documentElement.scrollTop > 850) ? "block" : "none";
             },
             pageUp = (event) => {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
+                document.body.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+                document.documentElement.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
             };
         window.addEventListener("scroll", scrollBtnDisplay);
         scroll_btn.addEventListener("click", pageUp);

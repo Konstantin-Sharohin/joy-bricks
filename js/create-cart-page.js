@@ -3,12 +3,13 @@
         cart_container = document.querySelector(".cart-page-container"),
         cart_inner_container = document.querySelector(".cart-page-inner-container"),
 
-        params = {};
-        params.cart_container = cart_container;
-        params.cart_inner_container = cart_inner_container;
-
     if (!cart_array || cart_array.length == 0) {
-        showEmptyCart(params);
+
+        cart_inner_container.style.display = "none";
+    let note = document.createElement("div");
+        note.innerHTML = "<i>Ваша корзина пуста...</i>";
+        cart_container.appendChild(note);
+
         } else {
         let carts_length = cart_array.length,
             cart_table = document.querySelector(".table"),
@@ -54,12 +55,4 @@
             cell_total.innerHTML = cart_total_price + ' грн';
             cart_table_row_total.appendChild(cell_total);
     };
-
-    function showEmptyCart(params) {
-        params.cart_inner_container.style.display = "none";
-    let note = document.createElement("div");
-        note.innerHTML = "<i>Ваша корзина пуста...</i>";
-        params.cart_container.appendChild(note);
-    };
-
 })();

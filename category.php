@@ -33,7 +33,7 @@
 	<section class="intro">
 		<?php
 			if (!$result_some_products) {
-				die('Invalid query: ' . mysqli_error());
+				die('Invalid query: ' . mysqli_error($result_some_products));
 			};
 			echo '<div class="catalog-container">';
 			while (list($id, $title, $category, $photo, $price, $code) = mysqli_fetch_array($result_some_products, MYSQLI_NUM)) {
@@ -54,13 +54,13 @@
 								</a>
 								<div class="add-cart-icon" title="Добавить в корзину">
 									<span class="add-cart-symbol">
-										<i class="fas fa-cart-arrow-down" data-action="0"></i>
+										<i class="fas fa-cart-arrow-down" data-action=0 data-quantity=0></i>
 									</span>
 								</div>
-						</div>
-					</div>';
+						</div>';
 			}
-			echo '<button class="return-to-top-btn" title="Вернуться наверх">
+			echo '</div>
+				<button class="return-to-top-btn" title="Вернуться наверх">
 					<span class="up-symbol">
 						<i class="fas fa-angle-double-up"></i>
 					</span>
