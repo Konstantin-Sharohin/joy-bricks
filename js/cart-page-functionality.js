@@ -2,12 +2,11 @@
     let cart_array = JSON.parse(window.localStorage.getItem("filled_cart"));
 
     if (cart_array && cart_array.length != 0) {
-        let items_container = document.querySelector(".table"),
-            counter = window.localStorage.getItem("cart_counter"),
-            action_array = JSON.parse(window.localStorage.getItem("action_array")),
+        let counter = window.localStorage.getItem("cart_counter"),
             header_cart_icon = document.querySelector(".cart-icon span"),
-            cart_container = document.querySelector(".cart-page-container"),
-            cart_inner_container = document.querySelector(".cart-page-inner-container");
+            cart_page_container = document.querySelector(".cart-page-container"),
+            cart_page_inner_container = document.querySelector(".cart-page-inner-container"),
+            items_container = document.querySelector(".table");
 
         if (document.addEventListener) {
             items_container.addEventListener("click", action);
@@ -46,8 +45,7 @@
             create_cart_object();
 
                 if (params.action == "add") {
-                    counter++;
-                    total_quantity++;
+
 
                     cart_array.push(current_item);
 
@@ -82,14 +80,8 @@
 
 
             function delete_row(params) {
-            let current_item = {};
-                current_item.title = params.current_button_container.querySelector('.cell:first-child').getAttribute('title');
-                current_item.photo = params.current_button_container.querySelector('.cart-page-item-img').getAttribute('src');
-                current_item.price = params.current_button_container.querySelector('.item-price').textContent;
-                current_item.code = params.current_button_container.querySelector('.cart-page-item-code').textContent;
-                current_item.quantity = 1;
 
-            let action_array = JSON.parse(window.localStorage.getItem("action_array")),
+
                 counter = window.localStorage.getItem("cart_counter");
                 counter--;
 
@@ -109,11 +101,11 @@
 
 
             function showEmptyCart() {
-                cart_inner_container.classList.add("deletion-animation");
-                cart_inner_container.remove();
+                cart_page_inner_container.classList.add("deletion-animation");
+                cart_page_inner_container.remove();
                 let note = document.createElement("div");
                 note.innerHTML = "<i>Ваша корзина пуста...</i>";
-                cart_container.appendChild(note);
+                cart_page_container.appendChild(note);
             };
 
 
@@ -137,18 +129,23 @@
 
 
             function create_cart_object() {
-            let current_item = {};
-                current_item.title = params.current_button_container.querySelector('.cell:first-child').getAttribute('title');
-                current_item.photo = params.current_button_container.querySelector('.cart-page-item-img').getAttribute('src');
-                current_item.price = params.current_button_container.querySelector('.item-price').textContent;
-                current_item.code = params.current_button_container.querySelector('.cart-page-item-code').textContent;
+            let current_item = {
+                "title": current_button_container.querySelector('a').getAttribute('title'),
+                "photo": current_button_container.querySelector('img').getAttribute('src'),
+                "price": current_button_container.querySelector('.item-price').textContent,
+                "code": current_button_container.querySelector('.item-code').textContent,
+                "quantity": current_button_container.querySelector('.cell:nth-child(2)').getAttribute('quantity'),
+                "action": target.dataset.action
+                };
             return current_item;
             };
 
 
             if (selectedButtonClass == "item-add") {
-                params.action = "add";
                 params.current_quantity++;
+                counter++;
+                current_item.action = 1;
+
                 count(params);
 
             } else if (selectedButtonClass == "item-substract" && current_quantity > 1) {
@@ -164,7 +161,5 @@
                 return;
             };
         };
-
     };
-
 }());
