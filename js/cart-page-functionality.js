@@ -1,10 +1,9 @@
 (function () {
     let cart_array = JSON.parse(window.localStorage.getItem("filled_cart"));
 
+//if the Cart Array exists and is not empty - get counter and reference to html-elements
     if (cart_array && cart_array.length != 0) {
-        let counter = window.localStorage.getItem("cart_counter"),
-            header_cart_icon = document.querySelector(".cart-icon span"),
-            cart_page_container = document.querySelector(".cart-page-container"),
+        let cart_page_container = document.querySelector(".cart-page-container"),
             cart_page_inner_container = document.querySelector(".cart-page-inner-container"),
             items_container = document.querySelector(".table");
 
@@ -14,152 +13,128 @@
             items_container.attachEvent("onclick", action);
         };
 
-
-        function action(event) {
-            let selectedButtonClass = event.target.className;
-            let target = event.target;
-                if (selectedButtonClass == "fas fa-trash-alt") {
-                    current_button_container = target.parentNode.parentNode.parentNode.parentNode;
-                } else if (selectedButtonClass == "symbol-delete-item" || selectedButtonClass == "item-add" || selectedButtonClass == "item-substract") {
-                    current_button_container = target.parentNode.parentNode.parentNode;
-                };
-            let current_quantity = parseInt(current_button_container.querySelector(".item-quantity").textContent),
-                current_initial_price = parseInt(current_button_container.querySelector(".item-price").textContent),
-
-                params = {
-                    "current_button_container": current_button_container,
-                    "current_quantity": current_quantity,
-                    "current_initial_price": current_initial_price,
-                    "total_quantity": 0,
-                    "counter": counter
-                };
+//declaring functions for some actions
+        function show_empty_cart() {
+            cart_page_inner_container.classList.add("deletion-animation");
+            setTimeout(() => cart_page_inner_container.remove(), 1000);
+        let note = document.createElement("div");
+            note.innerHTML = "<i>Ваша корзина пуста...</i>";
+            cart_page_container.appendChild(note);
+        };
 
 
-        function count(params) {
-            if (params.current_button_container.className !== "row items deletion-animation") {
-                params.current_button_container.querySelector(".item-quantity").textContent = params.current_quantity;
+        function calculate_rows(params) {
+        let row_nodeList = items_container.querySelectorAll(".row.items");
+            if (row_nodeList.length == 0) {
+                params.total_price = 0;
+                return params.total_price;
             };
 
-            calculate_rows();
+        let row_nodeList_length = row_nodeList.length,
+            i = 0,
+            total_price = 0;
+            for (i; i < row_nodeList_length; i++) {
+                row_item_price = parseInt(row_nodeList[i].querySelector(".item-price").textContent);
+                row_quantity = parseInt(row_nodeList[i].querySelector(".item-quantity").textContent);
+                row_total_price = row_item_price * row_quantity;
+                total_price += row_total_price;
+            };
+            params.total_price = total_price;
+        };
 
-            create_cart_object();
 
-                if (params.action == "add") {
+        function create_item_object(params) {
+        let current_item = {
+            "title": current_button_container.querySelector('.cell:first-child').getAttribute('title'),
+            "photo": current_button_container.querySelector('.cart-page-item-img').getAttribute('src'),
+            "price": current_button_container.querySelector('.cart-page-item-price').textContent,
+            "code": current_button_container.querySelector('.cart-page-item-code').textContent,
+            "quantity": params.current_item_quantity
+            };
+        params.current_item = current_item;
+        };
 
 
-                    cart_array.push(current_item);
+//main event handler, that includes all functionality
+        function action(event) {
+            let counter = parseInt(window.localStorage.getItem("cart_counter")),
+                selectedButtonClass = event.target.className,
+                target = event.target;
+
+                if (selectedButtonClass == "fas fa-trash-alt") {
+                    current_button_container = target.parentNode.parentNode.parentNode.parentNode;
+                } else if (selectedButtonClass == "item-delete" || selectedButtonClass == "item-add" || selectedButtonClass == "item-substract") {
+                    current_button_container = target.parentNode.parentNode.parentNode;
+                };
+
+            //getting initial price and quantity of the selected item
+            let current_item_quantity = parseInt(current_button_container.querySelector(".item-quantity").textContent),
+                current_item_initial_price = parseInt(current_button_container.querySelector(".item-price").textContent),
+
+            //saving the references above to the object
+                params = {
+                    "current_item_quantity": current_item_quantity,
+                    "current_item_initial_price": current_item_initial_price,
+                    "total_quantity": counter,
+                    "total_price": 0
+                };
+
+            //defining actions for 'add' button
+                if (selectedButtonClass == "item-add") {
+                    params.current_item_quantity++;
+                    current_button_container.querySelector(".item-quantity").textContent = params.current_item_quantity;
+                    params.total_quantity++;
+                    create_item_object(params);
+                    calculate_rows(params);
+                    items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
+                    counter = params.total_quantity;
+
+                let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
+                    cart_array.splice(item_index, 1, params.current_item);
 
                     window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
                     window.localStorage.setItem("cart_counter", counter);
 
-                    params.items_container.querySelector(".row.total-row div:last-child").textContent = total_price + ' грн';
+            //defining actions for 'substract' button
+                } else if (selectedButtonClass == "item-substract" && current_item_quantity > 1) {
+                    params.current_item_quantity--;
+                    current_button_container.querySelector(".item-quantity").textContent = params.current_item_quantity;
+                    params.total_quantity--;
+                    create_item_object(params);
+                    calculate_rows(params);
+                    items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
+                    counter = params.total_quantity;
 
-                    counter = total_quantity;
-                    header_cart_icon.dataset.counter = counter;
+                let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
+                    cart_array.splice(item_index, 1, params.current_item);
 
-                } else if (params.action == "substract") {
-                    if (current_item.quantity > 1) {
-                        total_quantity--;
+                    window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
+                    window.localStorage.setItem("cart_counter", counter);
 
-                        counter = window.localStorage.getItem("cart_counter");
-                        counter--;
+            //defining actions for 'delete' button
+                } else if (selectedButtonClass == "fas fa-trash-alt" || selectedButtonClass == "item-delete") {
+                    params.total_quantity -= params.current_item_quantity;
+                    create_item_object(params);
 
-                    let item_index = cart_array.findIndex(i => i.title == current_item.title);
-                        cart_array.splice(item_index, 1);
+                    current_button_container.classList.add("deletion-animation");
+                    setTimeout(() => current_button_container.remove(), 1000);
 
-                        window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
-                        window.localStorage.setItem("cart_counter", counter);
+                    calculate_rows(params);
 
-                        params.items_container.querySelector(".row.total-row div:last-child").textContent = total_price + ' грн';
+                let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
+                    cart_array.splice(item_index, 1);
 
-                        counter = total_quantity;
-                        header_cart_icon.dataset.counter = counter;
+                    if (cart_array.length != 0) {
+                        items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
+                    } else {
+                        show_empty_cart();
                     };
+
+                    counter = params.total_quantity;
+
+                    window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
+                    window.localStorage.setItem("cart_counter", counter);
                 };
             };
-
-
-            function delete_row(params) {
-
-
-                counter = window.localStorage.getItem("cart_counter");
-                counter--;
-
-                cart_array.pop(current_item);
-
-                window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
-                window.localStorage.setItem("cart_counter", counter);
-
-                params.current_button_container.classList.add("deletion-animation");
-
-                params.current_button_container.remove();
-
-                if (cart_array.length == 0) {
-                    showEmptyCart(params);
-                };
-            };
-
-
-            function showEmptyCart() {
-                cart_page_inner_container.classList.add("deletion-animation");
-                cart_page_inner_container.remove();
-                let note = document.createElement("div");
-                note.innerHTML = "<i>Ваша корзина пуста...</i>";
-                cart_page_container.appendChild(note);
-            };
-
-
-            function calculate_rows() {
-            let row_nodeList = params.items_container.querySelectorAll(".row.items");
-                if (row_nodeList.length == 0) return;
-
-            let row_nodeList_length = row_nodeList.length,
-                i = 0,
-                total_price = 0,
-                total_quantity = 0;
-                for (i; i < row_nodeList_length; i++) {
-                    row_item_price = parseInt(row_nodeList[i].querySelector(".item-price").textContent);
-                    row_quantity = parseInt(row_nodeList[i].querySelector(".item-quantity").textContent);
-                    row_total_price = row_item_price * row_quantity;
-                    total_price += row_total_price;
-                    total_quantity += row_quantity;
-                };
-                return total_price, total_quantity;
-            };
-
-
-            function create_cart_object() {
-            let current_item = {
-                "title": current_button_container.querySelector('a').getAttribute('title'),
-                "photo": current_button_container.querySelector('img').getAttribute('src'),
-                "price": current_button_container.querySelector('.item-price').textContent,
-                "code": current_button_container.querySelector('.item-code').textContent,
-                "quantity": current_button_container.querySelector('.cell:nth-child(2)').getAttribute('quantity'),
-                "action": target.dataset.action
-                };
-            return current_item;
-            };
-
-
-            if (selectedButtonClass == "item-add") {
-                params.current_quantity++;
-                counter++;
-                current_item.action = 1;
-
-                count(params);
-
-            } else if (selectedButtonClass == "item-substract" && current_quantity > 1) {
-                params.action = "substract";
-                params.current_quantity--;
-                count(params);
-
-            } else if (selectedButtonClass == "fas fa-trash-alt" || selectedButtonClass == "symbol-delete-item") {
-                delete_row(params);
-                count(params);
-
-            } else {
-                return;
-            };
-        };
     };
 }());

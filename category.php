@@ -54,7 +54,7 @@
 								</a>
 								<div class="add-cart-icon" title="Добавить в корзину">
 									<span class="add-cart-symbol">
-										<i class="fas fa-cart-arrow-down" data-action=0 data-quantity=0></i>
+										<i class="fas fa-cart-arrow-down" data-quantity=0></i>
 									</span>
 								</div>
 						</div>';

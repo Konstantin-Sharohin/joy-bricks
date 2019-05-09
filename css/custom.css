@@ -110,7 +110,7 @@ body {
     padding: 0.5rem 0;
   }
 
-  .navbar .responsive {
+  .navbar a:nth-child(2).responsive, .navbar a:nth-child(3).responsive, .navbar a:nth-child(4).responsive {
     position: relative;
     visibility: visible;
     opacity: 1;
@@ -999,7 +999,7 @@ address p:nth-child(2) i {
   background: rgb(43, 150, 43);
 }
 
-.symbol-delete-item {
+.item-delete {
   color: rgb(202, 86, 109);
   padding-right: 1.2em;
   font-size: 1.5em;
@@ -1011,7 +1011,7 @@ address p:nth-child(2) i {
 .deletion-animation {
   visibility: hidden;
   opacity: 0;
-  translate: 60px;
+  transform: translate(-60px);
   transition: all 1s;
 }
 /*CART TABLE END */
