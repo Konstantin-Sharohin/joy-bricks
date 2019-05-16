@@ -23,13 +23,14 @@
 			</p>
 		</form>
 
-		<h2>Ваш заказ</h2>
-		<div class="cart-summary-header">
-			<p class="cart-summary-header-title">Наименование</p>
-			<p class="cart-summary-header-quantity">Количество (шт.)</p>
-			<p class="cart-summary-header-price">Цена (за шт.)</p>
+		<div class="cart-summary-container">
+			<h2>Ваш заказ</h2>
+			<div class="cart-summary-header">
+				<p class="cart-summary-header-title">Наимен.</p>
+				<p class="cart-summary-header-quantity">Кол-во</p>
+				<p class="cart-summary-header-price">Цена</p>
+			</div>
 		</div>
-
 	</div>
 
 	<?php
@@ -41,7 +42,7 @@
 		?>
 </main>
 <script src="js/return-top-btn.js"></script>
-<script src="js/cart_submit.js"></script>
+<script src="js/cart-submit.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

@@ -56,6 +56,7 @@
 					];
 		} else {
 			$pages = [
+			'Joy&nbsp;Bricks' => ['index.php', '<img src="images/bricks.png" id="navbar-logo">'],
 			'История' => ['history.php', '<span class="nav-symbol history"><i class="fas fa-book"></i></span>'],
 			'Контакты' => ['contacts.php', '<span class="nav-symbol contacts"><i class="fas fa-envelope"></i></span>'],
 			'Доставка и оплата' => ['delivery-payment.php', '<span class="nav-symbol delivery"><i class="fas fa-shipping-fast"></i></span>']
@@ -88,7 +89,7 @@
 			<i class="fas fa-angle-down"></i>
 		</a>
 		<?php
-		if (!(basename($_SERVER['PHP_SELF']) == 'cart.php')) {
+		if ((basename($_SERVER['PHP_SELF'])) != 'cart.php' && (basename($_SERVER['PHP_SELF'])) != 'order-form.php') {
 			echo '<a href="cart.php" class="cart-icon">
 				<span class="cart-symbol" data-counter="0">
 					<i class="fas fa-cart-arrow-down"></i>
