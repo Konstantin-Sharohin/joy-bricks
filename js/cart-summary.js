@@ -31,7 +31,7 @@
         let cart_summary_price_item = document.createElement("p");
             //cart_summary_price_item.classList.add("");
             cart_summary_price_item.textContent = element.price;
-            total_price += parseInt(element.price);
+            total_price += parseInt(element.price) * parseInt(element.quantity);
             cart_summary_price_column.appendChild(cart_summary_price_item);
 
             cart_summary.appendChild(cart_summary_title_column);
@@ -43,34 +43,19 @@
         cart_summary_totalprice_row.textContent = "Итого: " + total_price + " грн";
         cart_summary_totalprice_row.classList.add("cart-summary-totalprice");
 
-    let cart_summary_button = document.createElement("button");
-        cart_summary_button.classList.add("cart-submit-btn");
-        cart_summary_button.textContent = "Подтвердить заказ";
+    let cart_summary_send_button = document.createElement("div");
+        cart_summary_send_button.classList.add("cart-submit-btn", "cart-submit-btn-confirm");
+        cart_summary_send_button.textContent = "Подтвердить";
+
+    let cart_summary_return_button = document.createElement("div");
+        cart_summary_return_button.classList.add("cart-submit-btn", "cart-submit-btn-return");
+        cart_summary_return_button.textContent = "Вернуться";
+
+    let button_container = document.createElement("div");
+        button_container.classList.add("cart-summary-button-container");
 
         summary_container.appendChild(cart_summary);
         summary_container.appendChild(cart_summary_totalprice_row);
-        page_container.appendChild(cart_summary_button);
-
-
-
-    /* var someObj = {a:1,b:2};
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'scratch.php');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('param=' + JSON.stringify(someObj));
-    xhr.onreadystatechange = function()
-    {
-      if (this.readyState == 4)
-      {
-        if (this.status == 200)
-        {
-          console.log(xhr.responseText);
-        }
-        else
-        {
-          console.log('ajax error');
-        }
-      }
-    };
- */
+        button_container.append(cart_summary_return_button, cart_summary_send_button);
+        page_container.appendChild(button_container);
 }());

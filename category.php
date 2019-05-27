@@ -17,25 +17,27 @@
 				die('Invalid query: ' . mysqli_error());
 			};
 
-			if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-				$cat_id = $_GET['id'];
-			$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE category_id = ' . $cat_id . ' ORDER BY id';
-			$result_some_products = mysqli_query($dbConnect, $query_some_products);
-
 			while (list($id, $category) = mysqli_fetch_array($result_all_categories, MYSQLI_NUM)) {
 				echo '<li><a href="category.php?id=' . $id . '" class="list" title="' . $category . '">' . $category . '</a></li>';
 			};
-		};
 			?>
 		</ul>
 	</div>
 	</aside>
 	<section class="intro">
 		<?php
+			if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+				$cat_id = $_GET['id'];
+				$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE category_id = ' . $cat_id . ' ORDER BY id';
+				$result_some_products = mysqli_query($dbConnect, $query_some_products);
+			};
+
 			if (!$result_some_products) {
 				die('Invalid query: ' . mysqli_error($result_some_products));
 			};
+
 			echo '<div class="catalog-container">';
+
 			while (list($id, $title, $category, $photo, $price, $code) = mysqli_fetch_array($result_some_products, MYSQLI_NUM)) {
 				echo '<div class="catalog-item">
 								<a href="catalog-item.php?id=' . $id . '" class="catalog-item-link" title="' . $title . '">
@@ -68,6 +70,7 @@
 		?>
 	</section>
 	<script src="js/return-top-btn.js"></script>
+	<script src="js/price-filter.js"></script>
 	<script src="js/add-to-cart.js"></script>
 </main>
 <?php

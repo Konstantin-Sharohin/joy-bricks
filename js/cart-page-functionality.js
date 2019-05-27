@@ -9,15 +9,14 @@
 
         if (document.addEventListener) {
             items_container.addEventListener("click", action);
-        } else if (document.attachEvent) {
-            items_container.attachEvent("onclick", action);
-        };
+        } else console.log("Method 'addEventListener' cannot be applied");
 
 //declaring functions for some actions
         function show_empty_cart() {
             cart_page_inner_container.classList.add("deletion-animation");
             setTimeout(() => cart_page_inner_container.remove(), 1000);
-        let note = document.createElement("div");
+        let note = document.createElement("p");
+            note.style.textAlign = "center";
             note.innerHTML = "<i>Ваша корзина пуста...</i>";
             cart_page_container.appendChild(note);
         };

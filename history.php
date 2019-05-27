@@ -97,7 +97,6 @@
 
 		?>
     <script src="js/return-top-btn.js"></script>
-    <script src="js/add-to-cart.js"></script>
 </main>
 <?php
 	include('includes/footer.html');
