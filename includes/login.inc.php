@@ -47,5 +47,3 @@ if (empty($login_errors)) {
 	}
 
 }
-
-// Пропустить закрывающий тег PHP, чтобы избежать ошибок 'headers are sent'

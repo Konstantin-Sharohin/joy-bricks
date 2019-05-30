@@ -1,16 +1,39 @@
 <?php
-	require 'includes/config.inc.php';
-	require MYSQL;
+	require 'includes/mysql.inc.php';
 
-            if (filter_var($_GET['price-range'], FILTER_VALIDATE_INT)) {
-                $price = $_GET['price-range'];
+	//function price_filter($dbConnect) {
+		$price_range = !empty($_GET['price-range']) ?  htmlspecialchars($_GET['price-range']) : null;
+		$price_sort = isset($_GET['price-sort']) ?  htmlspecialchars($_GET['price-sort']) : null;
 
-            $query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE price <=' . $price . ' ORDER BY price';
-            $result_some_products = mysqli_query($dbConnect, $query_some_products);
+		function query($price_range, $price_sort, $dbConnect) {
+			//If the price range slider has been used
+			if ($price_range != null && $price_sort == null) {
+            	if (filter_var($price_range, FILTER_VALIDATE_INT)) {
+            		$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE price <=' . $price_range . ' ORDER BY id';
+					$result_some_products = mysqli_query($dbConnect, $query_some_products);
+				}
+			}
+			//If the price sorting button has been pushed
+			elseif ($price_sort != null && $price_range != null) {
+					if ($price_sort == "1") {
+						$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE price <=' . $price_range . ' ORDER BY price ASC';
+						$result_some_products = mysqli_query($dbConnect, $query_some_products);
+					}
+					elseif ($price_sort == "0") {
+						$query_some_products = 'SELECT id, title, category, photo, price, code FROM products WHERE price <=' . $price_range . ' ORDER BY price DESC';
+						$result_some_products = mysqli_query($dbConnect, $query_some_products);
+					}
+			}
+
+			return $result_some_products;
+		};
+
+		$result_some_products = query($price_range, $price_sort, $dbConnect);
 
 			if (!$result_some_products) {
-				die('Invalid query: ' . mysqli_error($result_some_products));
+				die('Invalid query: ' . mysqli_connect_error());
 			};
+
             echo '<div class="catalog-container">';
 
 			while (list($id, $title, $category, $photo, $price, $code) = mysqli_fetch_array($result_some_products, MYSQLI_NUM)) {
@@ -44,19 +67,32 @@
 					</span>
 				</button>';
 
-			echo '<div class="price-filters">
-						<div class="price-filters-container">
-							<button class="price-filter" title="Фильтр по цене">
-								<span class="filter-symbol">
-									<i class="fas fa-filter"></i>
-								</span>
-							</button>
-							<div class="price-range">
-								<span class="price-label">До&nbsp;</span>
-								<input type="range" class="price-filter-slider" name="price-range" min="250" max="1300" step="50" value="1300">
-								<output class="price-filter-output"></output>
-								<span class="price-label">&nbsp;грн</span>
+				echo '<div class="price-filters">
+							<div class="price-filters-container">
+								<button class="price-filter" title="Фильтр по цене">
+									<span class="filter-symbol">
+										<i class="fas fa-filter"></i>
+									</span>
+								</button>
+								<div class="price-range">
+									<span class="price-label">До&nbsp;</span>
+									<input type="range" class="price-filter-slider" name="price-range" min="250" max="1300" step="50" value="'. $price_range . '">
+									<output class="price-filter-output"></output>
+									<span class="price-label">&nbsp;грн</span>
+								</div>
 							</div>
-						</div>
-				</div>';
-		}
+					</div>
+					<div class="price-sort">
+							<div class="price-sort-container">
+								<button class="price-asc" title="Сортировка по возрастанию">
+									<span class="filter-symbol-asc">
+										<i class="fas fa-sort-amount-up"></i>
+									</span>
+								</button>
+								<button class="price-dsc" title="Сортировка по убыванию">
+									<span class="filter-symbol-dsc">
+										<i class="fas fa-sort-amount-down"></i>
+									</span>
+								</button>
+							</div>
+					</div>';

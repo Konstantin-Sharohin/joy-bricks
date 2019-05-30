@@ -1,5 +1,4 @@
 <?php
-
 define ('DB_HOST', 'localhost');
 define ('DB_USER', 'root');
 define ('DB_PASSWORD', 'paradox');
@@ -12,4 +11,4 @@ mysqli_set_charset($dbConnect, 'utf8');
 if (mysqli_connect_errno()) {
     printf("Не удалось подключиться: %s\n", mysqli_connect_error());
     exit();
-}
+};

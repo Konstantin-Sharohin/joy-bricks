@@ -6,7 +6,7 @@ $_SESSION['user_admin'] = true;
 $_SESSION['user_not_expired'] = true;
 $_SESSION=array();*/
 
-	require MYSQL;
+	require 'includes/mysql.inc.php';
 
 /*if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include('includes/login.inc.php');
@@ -21,11 +21,11 @@ include('includes/login.inc.php');
 		<h3 class="categories-title">Категории</h3>
 			<ul class="list">
 			<?php
-				$query_all_categories = 'SELECT * FROM categories ORDER BY category';
+				$query_all_categories = 'SELECT id, category FROM categories ORDER BY category';
 				$result_all_categories = mysqli_query($dbConnect, $query_all_categories);
 
 				if (!$query_all_categories) {
-					die('Invalid query: ' . mysqli_error($result_all_categories));
+					die('Invalid query: ' . mysqli_connect_error());
 				};
 
 				while (list($id, $category) = mysqli_fetch_array($result_all_categories, MYSQLI_NUM)) {
@@ -41,7 +41,7 @@ include('includes/login.inc.php');
 			$result_all_products = mysqli_query($dbConnect, $query_all_products);
 
 			if (!$result_all_products) {
-				die('Invalid query: ' . mysqli_error($result_all_products));
+				die('Invalid query: ' . mysqli_connect_error());
 			};
 			echo '<div class="catalog-container">';
 
@@ -85,10 +85,24 @@ include('includes/login.inc.php');
 							</button>
 							<div class="price-range">
 								<span class="price-label">До&nbsp;</span>
-								<input type="range" class="price-filter-slider" name="price-range" min="250" max="1300" step="50" value="1300">
+								<input type="range" class="price-filter-slider" name="price-range" min="250" max="1300" step="50" value="250">
 								<output class="price-filter-output"></output>
 								<span class="price-label">&nbsp;грн</span>
 							</div>
+						</div>
+				</div>
+				<div class="price-sort">
+						<div class="price-sort-container">
+							<button class="price-asc" title="Сортировка по возрастанию">
+								<span class="filter-symbol-asc">
+									<i class="fas fa-sort-amount-up"></i>
+								</span>
+							</button>
+							<button class="price-dsc" title="Сортировка по убыванию">
+								<span class="filter-symbol-dsc">
+									<i class="fas fa-sort-amount-down"></i>
+								</span>
+							</button>
 						</div>
 				</div>';
 		?>
@@ -96,6 +110,7 @@ include('includes/login.inc.php');
 	<script src="js/return-top-btn.js"></script>
 	<script src="js/add-to-cart.js"></script>
 	<script src="js/price-filter.js"></script>
+	<script src="js/price-sorting.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

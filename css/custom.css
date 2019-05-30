@@ -414,6 +414,19 @@ ul.list {
   right: 0vw;
   width: auto;
   box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
+  background: rgb(255, 250, 205);
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.price-sort {
+  display: none;
+  position: fixed;
+  bottom: 25vh;
+  right: 0vw;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   border-radius: 10px;
   border: none;
@@ -422,6 +435,13 @@ ul.list {
 
 .price-filters-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-sort-container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -444,8 +464,46 @@ ul.list {
   transition: all 1s;
 }
 
+.price-asc {
+  background: rgb(173, 156, 218);
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
+  color: rgb(129, 114, 114);
+  cursor: pointer;
+  padding: 15px;
+  margin: 0 0 0.3em;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+}
+
+.price-asc:hover {
+  background-color: rgb(85, 85, 85);
+  color: rgb(255, 255, 255);
+  transition: all 1s;
+}
+
+.price-dsc {
+  background: rgb(173, 156, 218);
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
+  color: rgb(129, 114, 114);
+  cursor: pointer;
+  padding: 15px;
+  margin: 0.3em 0 0;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+}
+
+.price-dsc:hover {
+  background-color: rgb(85, 85, 85);
+  color: rgb(255, 255, 255);
+  transition: all 1s;
+}
+
 .price-filter-output {
-  color: rgb(221, 78, 102);
+  color: rgb(100, 149, 192);
   margin: auto;
   font-size: 1.1em;
   font-weight: bold;
@@ -488,14 +546,14 @@ ul.list {
   -webkit-appearance: none;
   width: 10px;
   height: 35px;
-  background: rgb(53, 207, 74);
+  background: rgb(221, 78, 102);
   cursor: pointer;
 }
 
 .price-filter-slider::-moz-range-thumb {
   width: 10px;
   height: 35px;
-  background: rgb(53, 207, 74);
+  background: rgb(221, 78, 102);
   cursor: pointer;
 }
 /* SLIDER END */
@@ -796,7 +854,6 @@ address p:nth-child(2) i {
   margin: 2em auto;
   max-width: 800px;
   background-color: var(--grey-transparent);
-  border: solid 1px rgb(106, 107, 168);
   padding: 1em;
   border-radius: 10px;
 }
@@ -1245,7 +1302,6 @@ address p:nth-child(2) i {
 .payment-container,
 .delivery-container {
   background-color: var(--grey-transparent);
-  border: solid 1px rgb(106, 107, 168);
   padding: 1em;
   border-radius: 10px;
   max-width: 800px;
@@ -1357,7 +1413,6 @@ address p:nth-child(2) i {
   margin: 2em auto;
   max-width: 800px;
   background-color: var(--grey-transparent);
-  border: solid 1px rgb(106, 107, 168);
   padding: 1em;
   border-radius: 10px;
 }

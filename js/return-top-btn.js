@@ -4,7 +4,7 @@
 
     joyBricks.scroller = function () {
         const scroll_btn = document.querySelector('.return-to-top-btn'),
-            price_range_div = document.querySelector('.price-range');
+        price_range_div = document.querySelector('.price-range');
 
         const btnDisplay = () => {
             scroll_btn.style.display = (document.body.scrollTop > 850 || document.documentElement.scrollTop > 850) ? "block" : "none";

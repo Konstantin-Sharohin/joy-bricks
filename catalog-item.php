@@ -1,6 +1,6 @@
 <?php
 	require 'includes/config.inc.php';
-	require MYSQL;
+	require 'includes/mysql.inc.php';
 	$page_title = '';
 	require 'includes/header.html';
 ?>
@@ -10,36 +10,34 @@
 			<h3 class="categories-title">Категории</h3>
 			<ul class="list">
 				<?php
-			$query_all_categories = 'SELECT * FROM categories ORDER BY category';
+			$query_all_categories = 'SELECT id, category FROM categories ORDER BY category';
 			$result_all_categories = mysqli_query($dbConnect, $query_all_categories);
 
-			if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-				$prod_id = $_GET['id'];
-			$query_one_product = 'SELECT title, category, `description`, photo, price, code FROM products WHERE id = ' . $prod_id . '';
-			$result_one_product = mysqli_query($dbConnect, $query_one_product);
-
 			if (!$result_all_categories) {
-				die('Invalid query: ' . mysqli_error($result_all_categories));
-			};
-
-			if (!$result_one_product) {
-				die('Invalid query: ' . mysqli_error($result_one_product));
+				die('Invalid query: ' . mysqli_connect_error());
 			};
 
 			while (list($id, $category) = mysqli_fetch_array($result_all_categories, MYSQLI_NUM)) {
 				echo '<li><a href="category.php?id=' . $id . '" class="list" title="' . $category . '">' . htmlspecialchars($category) . '</a></li>';
-			};
-		};
+			}
 			?>
 			</ul>
 		</div>
 	</aside>
 	<section class="intro">
 		<?php
+			if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+				$prod_id = $_GET['id'];
+
+				$query_one_product = 'SELECT title, category, `description`, photo, price, code FROM products WHERE id = ' . $prod_id . '';
+				$result_one_product = mysqli_query($dbConnect, $query_one_product);
+
 			if (!$result_one_product) {
-				die('Invalid query: ' . mysqli_error($result_one_product));
+				die('Invalid query: ' . mysqli_connect_error());
 			};
+
 			echo '<div class="catalog-container">';
+
 			while (list($title, $category, $description, $photo, $price, $code) = mysqli_fetch_array($result_one_product, MYSQLI_NUM)) {
 			echo '<div class="item-container">
 						<h2 class="item-title">' . $title . '</h2>
@@ -75,6 +73,7 @@
 							<i class="fas fa-angle-double-up"></i>
 						</span>
 				</button>';
+		}
 		?>
 	</section>
 	<script src="js/return-top-btn.js"></script>

@@ -1,13 +1,9 @@
 ﻿<?php
-
 if (!defined('LIVE')) define ('LIVE', false);
-
 define ('CONTACT_EMAIL', 'info@joy-bricks.co.ua');
 define ('BASE_URI', 'C:/xampp/htdocs/joy-bricks/');
 define ('BASE_URL', 'localhost/joy-bricks/');
-define ('MYSQL', BASE_URI . 'includes/mysql.inc.php');
-
-session_start();
+//session_start();
 
 function cust_error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
 
@@ -24,20 +20,6 @@ function cust_error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
 		}
 	}
 	return true;
-}
+};
 
 set_error_handler('cust_error_handler');
-
-/*function redirect_invalid_user($check = 'user_id', $destination = 'index.php', $protocol = 'http://') {
-	if (!headers_sent()) {
-		if (!isset($_SESSION[$check])) {
-			$url = $protocol . BASE_URL . $destination;
-			header("Location: $url");
-			exit();
-		}
-	} else {
-			include_once('includes\header.html');
-			trigger_error('У вас нет разрешений на доступ к этой странице. Авторизируйтесь и попробуйте еще раз.');
-			include_once('includes\footer.html');
-			}
-}*/
