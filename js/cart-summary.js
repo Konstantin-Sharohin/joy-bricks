@@ -45,10 +45,18 @@
 
     let cart_summary_send_button = document.createElement("div");
         cart_summary_send_button.classList.add("cart-submit-btn", "cart-submit-btn-confirm");
+
+        <span class="filter-symbol-asc">
+				<i class="fas fa-sort-amount-up"></i>
+		</span>
         cart_summary_send_button.textContent = "Подтвердить";
 
     let cart_summary_return_button = document.createElement("div");
         cart_summary_return_button.classList.add("cart-submit-btn", "cart-submit-btn-return");
+
+        <span class="filter-symbol-asc">
+				<i class="fas fa-sort-amount-up"></i>
+		</span>
         cart_summary_return_button.textContent = "Вернуться";
 
     let button_container = document.createElement("div");

@@ -1,6 +1,6 @@
 <?php
 	require 'includes/config.inc.php';
-	require MYSQL;
+	require 'includes/mysql.inc.php';
 	require 'includes/header.html';
 ?>
 

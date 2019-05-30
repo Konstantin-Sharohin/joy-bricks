@@ -8,15 +8,16 @@
 
         const btnDisplay = () => {
             scroll_btn.style.display = (document.body.scrollTop > 850 || document.documentElement.scrollTop > 850) ? "block" : "none";
-        };
+        },
 
-        const pageUp = () => {
+        pageUp = () => {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
             price_range_div.style.width = "0px";
             price_range_div.style.visibility = "hidden";
+            price_range_div.style.padding = "0px";
         };
 
         if (document.addEventListener) {

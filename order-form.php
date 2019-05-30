@@ -41,8 +41,7 @@
 				</button>';
 		?>
 </main>
-<script src="js/return-top-btn.js"></script>
-<script src="js/cart-submit.js"></script>
+<script src="js/cart-summary.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

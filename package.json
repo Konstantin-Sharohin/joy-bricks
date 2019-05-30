@@ -17,5 +17,10 @@
     "url": "https://github.com/Konstantin-Sharohin/joy-bricks/issues"
   },
   "homepage": "https://github.com/Konstantin-Sharohin/joy-bricks#readme",
-  "dependencies": {}
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "autoprefixer": "^9.5.1",
+    "cssnano": "^4.1.10",
+    "grunt-postcss": "^0.9.0"
+  }
 }
