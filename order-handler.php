@@ -68,9 +68,9 @@ require('includes/mysql.inc.php');
 
 		foreach ($order as $key => $values) {
 			if (current($order) == end($order)) {
-				$add_order .= "($id, {$values['title']}, {$values['code']}, {$values['price']}, {$values['quantity']}, {$cart_total_price})";
+				$add_order .= "('$id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}')";
 			} else {
-				$add_order .= "($id, {$values['title']}, {$values['code']}, {$values['price']}, {$values['quantity']}, {$cart_total_price}), ";
+				$add_order .= "('$id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}'), ";
 			}
 		}
 
