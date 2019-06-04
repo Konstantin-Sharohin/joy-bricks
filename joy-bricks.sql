@@ -1,11 +1,12 @@
 CREATE DATABASE joy_bricks;
 
 CREATE TABLE `categories` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `category` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `category_UNIQUE` (`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 ALTER TABLE categories AUTO_INCREMENT=5;
 
 INSERT INTO `categories` (`id`, `category`) VALUES
@@ -17,26 +18,16 @@ INSERT INTO `categories` (`id`, `category`) VALUES
 
 
 CREATE TABLE `products` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL,
   `category_id` smallint(5) UNSIGNED NOT NULL,
-  `title` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` char(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `category` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `photo` char(40) NOT NULL,
   `price` int(10) UNSIGNED NOT NULL,
   `quantity` int(10) UNSIGNED NOT NULL,
-  `code` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `category_idx` (`category`),
-  INDEX `price_idx` (`price`),
-  INDEX `type_idx` (`type`),
-  INDEX `fk_product_category` (`category_id`),
-  CONSTRAINT `fk_product_category`
-      FOREIGN KEY (`category_id`)
-      REFERENCES `categories` (`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
+  `code` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE products AUTO_INCREMENT=13;
 
@@ -76,7 +67,7 @@ CREATE TABLE `users` (
 
 CREATE TABLE `orders` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`users_id` INT UNSIGNED NOT NULL,
+	`user_id` INT UNSIGNED NOT NULL,
 	`title` VARCHAR(45) NOT NULL,
 	`code` VARCHAR(45) NOT NULL,
   `price` INT UNSIGNED NOT NULL,
@@ -85,6 +76,19 @@ CREATE TABLE `orders` (
 	`date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	INDEX `date_created` (`date_created` ASC),
-		FOREIGN KEY (`users_id`)
+		FOREIGN KEY (`user_id`)
 		REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `error_logs` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `order_id` INT UNSIGNED NOT NULL,
+  `error_log` VARCHAR(255) NOT NULL,
+  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `date_created` (`date_created` ASC),
+  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
