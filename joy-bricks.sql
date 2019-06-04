@@ -85,7 +85,6 @@ CREATE TABLE `orders` (
 	`date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	INDEX `date_created` (`date_created` ASC),
-	CONSTRAINT `fk_orders_users`
-		FOREIGN KEY (`id`)
+		FOREIGN KEY (`users_id`)
 		REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

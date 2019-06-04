@@ -8,7 +8,7 @@ $dbConnect = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 mysqli_set_charset($dbConnect, 'utf8');
 
-if (mysqli_connect_errno()) {
+if (!$dbConnect) {
     printf("Не удалось подключиться: %s\n", mysqli_connect_error());
     exit();
 };

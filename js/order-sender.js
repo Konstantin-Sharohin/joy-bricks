@@ -20,7 +20,6 @@
 
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                console.log(request.responseText);
                 window.localStorage.clear();
                 result.innerHTML = request.responseText;
                 setTimeout(() => document.location.replace("http://localhost/joy-bricks/index.php"), 5000);

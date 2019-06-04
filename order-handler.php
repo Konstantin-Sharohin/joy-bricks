@@ -54,47 +54,68 @@ require('includes/mysql.inc.php');
 
 
 	//Check if the user exists in the database
-	$user_id = 'SELECT id FROM users WHERE email = ' . '\'' . $email . '\'';
+	$user_id = "SELECT id FROM users WHERE email = '{$email}'";
 	$query_result = mysqli_query($dbConnect, $user_id);
+
+	if (!$query_result) {
+		die('Invalid query: ' . mysqli_connect_error());
+	}
 
 	//If so, add an order
 	if (mysqli_num_rows($query_result) > 0) {
-		foreach ($order as $key => $values) {
-			list($id) = mysqli_fetch_array($query_result);
-			$add_order = 'INSERT INTO orders (`users_id`, `title`, `code`, `price`, `quantity`, `payment_amount`) VALUES (' . '\'' . $id . '\'' . ', ' . '\'' . $values['title'] . '\'' . ', ' . '\'' . $values['code'] . '\'' . ', ' . '\'' . $values['price'] . '\'' . ', ' . '\'' . $values['quantity'] . '\'' . ', ' . '\'' . $cart_total_price . '\'' . ')';
-			$add_order_query_result = mysqli_query($dbConnect, $add_order);
+		list($id) = mysqli_fetch_array($query_result);
+		$add_order = "INSERT INTO orders (users_id, title, code, price, quantity, payment_amount) VALUES ";
 
-		if (!$add_order_query_result) {
-			die('Invalid query: ' . mysqli_connect_error());
+		foreach ($order as $key => $values) {
+			if (current($order) == end($order)) {
+				$add_order .= "($id, {$values['title']}, {$values['code']}, {$values['price']}, {$values['quantity']}, {$cart_total_price})";
+			} else {
+				$add_order .= "($id, {$values['title']}, {$values['code']}, {$values['price']}, {$values['quantity']}, {$cart_total_price}), ";
+			}
 		}
-	}
+
+		$add_order_query_result = mysqli_query($dbConnect, $add_order);
+
+			if (!$add_order_query_result) {
+				die('Invalid query: ' . mysqli_connect_error());
+			}
 
 	//Otherwise add a new user and then the order
 	} elseif (mysqli_num_rows($query_result) == 0) {
-		$add_new_user = 'INSERT INTO `users` (`email`, `phone`, `address`, `first_name`, `last_name`) VALUES (' . '\'' . $email . '\'' . ', ' . '\'' . $phone . '\'' . ', ' . '\'' . $address_to_send . '\'' . ', ' . '\'' . $first_name . '\'' . ', ' . '\'' . $last_name . '\'' . ')';
+		$add_new_user = "INSERT INTO users (email, phone, address, first_name, last_name) VALUES ('{$email}', '{$phone}', '{$address_to_send}', '{$first_name}', '{$last_name}')";
 		$add_user_query_result = mysqli_query($dbConnect, $add_new_user);
 
-		if (!$add_user_query_result) {
-			die('Invalid query: ' . mysqli_connect_error());
-		};
+			if (!$add_user_query_result) {
+				die('Invalid query: ' . mysqli_connect_error());
+			}
 
-		$new_user_id = 'SELECT id FROM users WHERE email = ' . '\'' . $email . '\'';
+		$new_user_id = "SELECT id FROM users WHERE email = '{$email}'";
 		$new_user_id_query_result = mysqli_query($dbConnect, $new_user_id);
 
-		if (!$new_user_id_query_result) {
-			die('Invalid query: ' . mysqli_connect_error());
-		};
+			if (!$new_user_id_query_result) {
+				die('Invalid query: ' . mysqli_connect_error());
+			}
 
-		foreach ($order as $key => $values) {
-			list($new_id) = mysqli_fetch_array($query_result);
-			$add_new_order = 'INSERT INTO orders (`users_id`, `title`, `code`, `price`, `quantity`, `payment_amount`) VALUES (' . '\'' . $new_id . '\'' . ', ' . '\'' . $values['title'] . '\'' . ', ' . '\'' . $values['code'] . '\'' . ', ' . '\'' . $values['price'] . '\'' . ', ' . '\'' . $values['quantity'] . '\'' . ', ' . '\'' . $cart_total_price . '\'' . ')';
-			$add_new_order_query_result = mysqli_query($dbConnect, $add_new_order);
-		}
+		list($new_id) = mysqli_fetch_array($new_user_id_query_result);
+		$add_new_order = "INSERT INTO orders (users_id, title, code, price, quantity, payment_amount) VALUES ";
 
-		if (!$add_new_order_query_result) {
-			die('Invalid query: ' . mysqli_connect_error());
-		}
-	};
+			foreach ($order as $key => $values) {
+				if (current($order) == end($order)) {
+					$add_new_order .= "('$new_id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}')";
+				} else {
+					$add_new_order .= "('$new_id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}'), ";
+				}
+			}
+
+		$add_new_order_query_result = mysqli_query($dbConnect, $add_new_order);
+
+			if (!$add_new_order_query_result) {
+				die('Invalid query: ' . mysqli_connect_error());
+			}
+	}
+
+	echo "<p><b>Спасибо за заказ!</b></p>
+		<p>Подтверждение покупки отправлено на указанный Вами адрес электронной почты</p>";
 
 	//Sending mail to the client
 	/* $to_client = $email;
@@ -121,6 +142,3 @@ require('includes/mysql.inc.php');
 	$headers = "From: kos@localhost.com\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=UTF-8\r\n"; */
-
-		echo "<p><b>Спасибо за заказ!</b></p>
-		<p>Подтверждение покупки отправлено на указанный Вами адрес электронной почты</p>";
