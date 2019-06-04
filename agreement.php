@@ -140,12 +140,15 @@
                 предусмотренных действующим законодательством Украины.</p>
         </article>
     </div>
+
     <button class="return-to-top-btn" title="Вернуться наверх">
 		<span class="up-symbol">
 			<i class="fas fa-angle-double-up"></i>
 		</span>
-	</button>
+    </button>
+
     <script src="js/return-top-btn.js"></script>
+    <script src="js/header-cart-initialisation.js"></script>
 </main>
 <?php
 	include('includes/footer.html');

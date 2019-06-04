@@ -1,15 +1,15 @@
 (function () {
 
-    let form = document.querySelector(".contacts-reply"),
+    const form = document.querySelector(".contacts-reply"),
         result = document.querySelector(".message-output");
 
     if (document.addEventListener) {
         document.querySelector(".send-reply").addEventListener("click", sendRequest);
-    } else (console.log("Method 'addEventListener' cannot be applied"));
+    } else console.log("Method 'addEventListener' cannot be applied");
 
     function sendRequest(event) {
         event.preventDefault();
-        let formData = new FormData(form),
+        const formData = new FormData(form),
             request = new XMLHttpRequest();
 
         request.open("POST", "message-handler.php");

@@ -65,16 +65,17 @@
 							</div>
 						</div>
 				</div>';
-			};
-
-			echo '</div>
-				<button class="return-to-top-btn" title="Вернуться наверх">
-						<span class="up-symbol">
-							<i class="fas fa-angle-double-up"></i>
-						</span>
-				</button>';
+			}
 		}
-		?>
+			?>
+			</div>
+
+			<button class="return-to-top-btn" title="Вернуться наверх">
+				<span class="up-symbol">
+					<i class="fas fa-angle-double-up"></i>
+				</span>
+			</button>
+
 	</section>
 	<script src="js/return-top-btn.js"></script>
 	<script src="js/add-to-cart.js"></script>

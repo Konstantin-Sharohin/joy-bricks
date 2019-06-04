@@ -61,44 +61,46 @@
 								</div>
 						</div>';
 			}
-			echo '</div>
-				<button class="return-to-top-btn" title="Вернуться наверх">
-					<span class="up-symbol">
-						<i class="fas fa-angle-double-up"></i>
-					</span>
-				</button>';
+			?>
+			</div>
 
-				echo '<div class="price-filters">
-							<div class="price-filters-container">
-								<button class="price-filter" title="Фильтр по цене">
-									<span class="filter-symbol">
-										<i class="fas fa-filter"></i>
-									</span>
-								</button>
-								<div class="price-range">
-									<span class="price-label">До&nbsp;</span>
-									<input type="range" class="price-filter-slider" name="price-range" min="250" max="1300" step="50" value="250">
-									<output class="price-filter-output"></output>
-									<span class="price-label">&nbsp;грн</span>
-								</div>
-							</div>
+			<button class="return-to-top-btn" title="Вернуться наверх">
+				<span class="up-symbol">
+					<i class="fas fa-angle-double-up"></i>
+				</span>
+			</button>
+
+			<div class="price-filters">
+				<div class="price-filters-container">
+					<button class="price-filter" title="Фильтр по цене">
+						<span class="filter-symbol">
+							<i class="fas fa-filter"></i>
+						</span>
+					</button>
+					<div class="price-range">
+						<span class="price-label">До&nbsp;</span>
+						<input type="range" class="price-filter-slider" name="price-range" min="250" max="1300" step="50" value="250">
+						<output class="price-filter-output"></output>
+						<span class="price-label">&nbsp;грн</span>
 					</div>
-					<div class="price-sort">
-							<div class="price-sort-container">
-								<button class="price-asc" title="Сортировка по возрастанию">
-									<span class="filter-symbol-asc">
-										<i class="fas fa-sort-amount-up"></i>
-									</span>
-								</button>
-								<button class="price-dsc" title="Сортировка по убыванию">
-									<span class="filter-symbol-dsc">
-										<i class="fas fa-sort-amount-down"></i>
-									</span>
-								</button>
-							</div>
-					</div>';
-		?>
+				</div>
+			</div>
+			<div class="price-sort">
+				<div class="price-sort-container">
+					<button class="price-asc" title="Сортировка по возрастанию">
+						<span class="filter-symbol-asc">
+							<i class="fas fa-sort-amount-up"></i>
+						</span>
+					</button>
+					<button class="price-dsc" title="Сортировка по убыванию">
+						<span class="filter-symbol-dsc">
+							<i class="fas fa-sort-amount-down"></i>
+						</span>
+					</button>
+				</div>
+			</div>
 	</section>
+
 	<script src="js/return-top-btn.js"></script>
 	<script src="js/add-to-cart.js"></script>
 	<script src="js/price-filter.js"></script>

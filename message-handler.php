@@ -1,5 +1,5 @@
 <?php
-require('config.inc.php');
+require('includes/config.inc.php');
 
 	$name = htmlspecialchars($_POST['name']);
 	$email = htmlspecialchars($_POST['email']);
@@ -9,7 +9,7 @@ require('config.inc.php');
 	$no_spam2 = htmlspecialchars($_POST['no_spam2']);
 	$subject = 'Форма отправки сообщений';
 	$to = "ksharohin@gmail.com";
-	$headers = "From: kos@localhost\r\n";
+	$headers = "From: kos@localhost.com\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=UTF-8\r\n";
 

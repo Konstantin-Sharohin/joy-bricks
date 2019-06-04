@@ -27,20 +27,29 @@ include('includes/header.html');
 			<input name="no_spam1" type="text" style="display:none">
 			<p><div class="numbers"><img src="./images/check.jpg" width="150px" height="50px"></div></p>
 			<p><input name="no_spam2" id="check" type="text" placeholder="Введите результат" required></p>
-			<p><button type="submit" name="send" class="send-reply">Отправить</button></p>
+			<p>
+				<button type="submit" name="send" class="send-reply" title="Отправить">
+					<span class="send-span">
+						<i class="far fa-paper-plane"></i>
+					</span>
+					<span class="send-btn-title">
+						Отправить
+					</span>
+				</button>
+			</p>
 			<p class="message-output"></p>
 		</form>
 	</div>
-	<?php
-	echo '<button class="return-to-top-btn" title="Вернуться наверх">
-					<span class="up-symbol">
-						<i class="fas fa-angle-double-up"></i>
-					</span>
-			</button>';
 
-		?>
+	<button class="return-to-top-btn" title="Вернуться наверх">
+		<span class="up-symbol">
+			<i class="fas fa-angle-double-up"></i>
+		</span>
+	</button>
+
 	<script src="js/return-top-btn.js"></script>
 	<script src="js/message-sender.js"></script>
+	<script src="js/header-cart-initialisation.js"></script>
 </main>
 <?php
 	include('includes/footer.html');

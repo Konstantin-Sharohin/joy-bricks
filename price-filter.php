@@ -2,7 +2,7 @@
 	require 'includes/mysql.inc.php';
 
 	//function price_filter($dbConnect) {
-		$price_range = !empty($_GET['price-range']) ?  htmlspecialchars($_GET['price-range']) : null;
+		$price_range = isset($_GET['price-range']) ?  htmlspecialchars($_GET['price-range']) : null;
 		$price_sort = isset($_GET['price-sort']) ?  htmlspecialchars($_GET['price-sort']) : null;
 
 		function query($price_range, $price_sort, $dbConnect) {

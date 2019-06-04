@@ -66,7 +66,9 @@
                 table_row.appendChild(cell_price);
                 cart_table.insertBefore(table_row, total_header);
                 cart_total_price += parseInt(cart_array[i].price) * cart_array[i].quantity;
-            }
+            };
+
+            window.localStorage.setItem("cart_total_price", cart_total_price);
 
         let cell_total = document.createElement("div");
             cell_total.classList.add("cell");

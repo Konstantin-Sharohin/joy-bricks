@@ -1,9 +1,9 @@
 (function () {
-    let cart_array = JSON.parse(window.localStorage.getItem("filled_cart"));
+    const cart_array = JSON.parse(window.localStorage.getItem("filled_cart"));
 
 //if the Cart Array exists and is not empty - get counter and reference to html-elements
     if (cart_array && cart_array.length != 0) {
-        let cart_page_container = document.querySelector(".cart-page-container"),
+        const cart_page_container = document.querySelector(".cart-page-container"),
             cart_page_inner_container = document.querySelector(".cart-page-inner-container"),
             items_container = document.querySelector(".table");
 
@@ -11,11 +11,11 @@
             items_container.addEventListener("click", action);
         } else console.log("Method 'addEventListener' cannot be applied");
 
-//declaring functions for some actions
+//declaring functions for "empty cart", "row calculation", "order item object" and "update_save" (in order to avoid repetitions below)
         function show_empty_cart() {
             cart_page_inner_container.classList.add("deletion-animation");
             setTimeout(() => cart_page_inner_container.remove(), 1000);
-        let note = document.createElement("p");
+            const note = document.createElement("p");
             note.style.textAlign = "center";
             note.innerHTML = "<i>Ваша корзина пуста...</i>";
             cart_page_container.appendChild(note);
@@ -23,9 +23,9 @@
 
 
         function calculate_rows(params) {
-        let row_nodeList = items_container.querySelectorAll(".row.items");
+        const row_nodeList = items_container.querySelectorAll(".row.items");
             if (row_nodeList.length == 0) {
-                params.total_price = 0;
+                params.total_price =  0;
                 return params.total_price;
             };
 
@@ -43,35 +43,54 @@
 
 
         function create_item_object(params) {
-        let current_item = {
-            "title": current_button_container.querySelector('.cell:first-child').getAttribute('title'),
-            "photo": current_button_container.querySelector('.cart-page-item-img').getAttribute('src'),
-            "price": current_button_container.querySelector('.cart-page-item-price').textContent,
-            "code": current_button_container.querySelector('.cart-page-item-code').textContent,
+        const current_item = {
+            "title": params.current_button_container.querySelector('.cell:first-child').getAttribute('title'),
+            "photo": params.current_button_container.querySelector('.cart-page-item-img').getAttribute('src'),
+            "price": params.current_button_container.querySelector('.cart-page-item-price').textContent,
+            "code": params.current_button_container.querySelector('.cart-page-item-code').textContent,
             "quantity": params.current_item_quantity
             };
         params.current_item = current_item;
         };
 
 
-//main event handler, that includes all functionality
+        function update_save(params) {
+            create_item_object(params);
+            calculate_rows(params);
+            items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
+            counter = params.total_quantity;
+
+        let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
+            cart_array.splice(item_index, 1, params.current_item);
+
+            window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
+            window.localStorage.setItem("cart_counter", counter);
+            window.localStorage.setItem("cart_total_price", params.total_price);
+        };
+
+
+//One of the two main event handlers on "click" event
         function action(event) {
             let counter = parseInt(window.localStorage.getItem("cart_counter")),
                 selectedButtonClass = event.target.className,
                 target = event.target;
+            let current_button_container;
 
                 if (selectedButtonClass == "fas fa-trash-alt") {
                     current_button_container = target.parentNode.parentNode.parentNode.parentNode;
                 } else if (selectedButtonClass == "item-delete" || selectedButtonClass == "item-add" || selectedButtonClass == "item-substract") {
                     current_button_container = target.parentNode.parentNode.parentNode;
-                };
+                } else if (selectedButtonClass == "cart-submit-btn") {
+                    return;
+                }
 
             //getting initial price and quantity of the selected item
-            let current_item_quantity = parseInt(current_button_container.querySelector(".item-quantity").textContent),
+            const current_item_quantity = parseInt(current_button_container.querySelector(".item-quantity").textContent),
                 current_item_initial_price = parseInt(current_button_container.querySelector(".item-price").textContent),
 
             //saving the references above to the object
                 params = {
+                    "current_button_container": current_button_container,
                     "current_item_quantity": current_item_quantity,
                     "current_item_initial_price": current_item_initial_price,
                     "total_quantity": counter,
@@ -81,51 +100,34 @@
             //defining actions for 'add' button
                 if (selectedButtonClass == "item-add") {
                     params.current_item_quantity++;
-                    current_button_container.querySelector(".item-quantity").textContent = params.current_item_quantity;
+                    params.current_button_container.querySelector(".item-quantity").textContent = params.current_item_quantity;
                     params.total_quantity++;
-                    create_item_object(params);
-                    calculate_rows(params);
-                    items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
-                    counter = params.total_quantity;
-
-                let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
-                    cart_array.splice(item_index, 1, params.current_item);
-
-                    window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
-                    window.localStorage.setItem("cart_counter", counter);
+                    update_save(params);
 
             //defining actions for 'substract' button
                 } else if (selectedButtonClass == "item-substract" && current_item_quantity > 1) {
                     params.current_item_quantity--;
-                    current_button_container.querySelector(".item-quantity").textContent = params.current_item_quantity;
+                    params.current_button_container.querySelector(".item-quantity").textContent = params.current_item_quantity;
                     params.total_quantity--;
-                    create_item_object(params);
-                    calculate_rows(params);
-                    items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
-                    counter = params.total_quantity;
-
-                let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
-                    cart_array.splice(item_index, 1, params.current_item);
-
-                    window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
-                    window.localStorage.setItem("cart_counter", counter);
+                    update_save(params);
 
             //defining actions for 'delete' button
                 } else if (selectedButtonClass == "fas fa-trash-alt" || selectedButtonClass == "item-delete") {
                     params.total_quantity -= params.current_item_quantity;
                     create_item_object(params);
 
-                    current_button_container.classList.add("deletion-animation");
-                    setTimeout(() => current_button_container.remove(), 1000);
+                    params.current_button_container.classList.add("deletion-animation");
+                    //setTimeout(() => current_button_container.remove(), 1000);
+                    current_button_container.remove()
 
                     calculate_rows(params);
 
                 let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
                     cart_array.splice(item_index, 1);
 
-                    if (cart_array.length != 0) {
-                        items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
-                    } else {
+                    items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
+
+                    if (cart_array.length == 0) {
                         show_empty_cart();
                     };
 
@@ -133,6 +135,7 @@
 
                     window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
                     window.localStorage.setItem("cart_counter", counter);
+                    window.localStorage.setItem("cart_total_price", params.total_price);
                 };
             };
     };
