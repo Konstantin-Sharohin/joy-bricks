@@ -31,7 +31,7 @@ grunt.initConfig({
     },
 
     jshint: {
-      files: ['js/*.js']
+      files: ['js/dest/*.js']
     },
 
     uglify: {
@@ -40,8 +40,15 @@ grunt.initConfig({
           sourceMap: true,
           sourceMapName: 'js/dest/sourcemap.map'
         },
-        files: {
-            'js/dest/': ['js/src/*.js']
+        dist: {
+          files: [{
+            expand: true,     // Enable dynamic expansion.
+            cwd: 'js/dest/',      // Src matches are relative to this path.
+            src: ['*.js'],
+            dest: 'js/dest/ugly/',   // Destination path prefix.
+            ext: '.js',   // Dest filepaths will have this extension.
+            extDot: 'first'   // Extensions in filenames begin after the first dot
+          }]
         }
     }
   });
