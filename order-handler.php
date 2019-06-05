@@ -13,7 +13,8 @@ require('includes/mysql.inc.php');
 
 	//Create text for the message
 	function createOrderText($order, $cart_total_price, $address_to_send) {
-		$text = '<table>
+		if ($order && $cart_total_price && $address_to_send) {
+			$text = '<table>
 					<tr>
 			  			<th>Наименование</th>
 			  			<th>Цена</th>
@@ -48,9 +49,29 @@ require('includes/mysql.inc.php');
 		$text = preg_replace('/\s+/', '', $text);
 
 		return $text;
+
+		} else {
+			throw new Exception('Отсутствуют параметры для createOrderText');
+		}
 	}
 
-	$text = createOrderText($order, $cart_total_price, $address_to_send);
+	function save_log($id, $new_id, $email, $dbConnect, $error) {
+		$user_id = $id ? $id : $new_id;
+
+		$get_order_id = "SELECT id FROM users WHERE email = '{$email}'";
+		$get_order_id_result = mysqli_query($dbConnect, $user_id);
+		list($order_id) = mysqli_fetch_array($get_order_id_result);
+
+		$add_new_log = "INSERT INTO error_logs ('user_id', 'order_id', 'error_log') VALUES ('{$user_id}', '{$order_id}', '{$error}')";
+		mysqli_query($dbConnect, $add_new_log);
+	}
+
+	try {
+		$text = createOrderText($order, $cart_total_price, $address_to_send);
+	} catch (Exception $e) {
+		echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+	}
+
 
 
 	//Check if the user exists in the database
@@ -58,7 +79,7 @@ require('includes/mysql.inc.php');
 	$get_user_id_query_result = mysqli_query($dbConnect, $get_user_id);
 
 	if (!$get_user_id_query_result) {
-		die('Invalid query: ' . mysqli_connect_error());
+		die('Ошибка соединения с базой данных' . mysqli_connect_error());
 	}
 
 	//If so, add an order
@@ -77,7 +98,7 @@ require('includes/mysql.inc.php');
 		$add_order_query_result = mysqli_query($dbConnect, $add_order);
 
 			if (!$add_order_query_result) {
-				die('Invalid query: ' . mysqli_connect_error());
+				die('Ошибка соединения с базой данных' . mysqli_connect_error());
 			}
 
 	//Otherwise add a new user and then the order
@@ -86,14 +107,14 @@ require('includes/mysql.inc.php');
 		$add_user_query_result = mysqli_query($dbConnect, $add_new_user);
 
 			if (!$add_user_query_result) {
-				die('Invalid query: ' . mysqli_connect_error());
+				die('Ошибка соединения с базой данных' . mysqli_connect_error());
 			}
 
 		$get_new_user_id = "SELECT id FROM users WHERE email = '{$email}'";
 		$new_user_id_query_result = mysqli_query($dbConnect, $get_new_user_id);
 
 			if (!$new_user_id_query_result) {
-				die('Invalid query: ' . mysqli_connect_error());
+				die('Ошибка соединения с базой данных' . mysqli_connect_error());
 			}
 
 		list($new_id) = mysqli_fetch_array($new_user_id_query_result);
@@ -110,7 +131,7 @@ require('includes/mysql.inc.php');
 		$add_new_order_query_result = mysqli_query($dbConnect, $add_new_order);
 
 			if (!$add_new_order_query_result) {
-				die('Invalid query: ' . mysqli_connect_error());
+				die('Ошибка соединения с базой данных' . mysqli_connect_error());
 			}
 	}
 
@@ -123,12 +144,17 @@ require('includes/mysql.inc.php');
 	$headers .= "Content-type: text/html; charset=UTF-8\r\n";
 
 	  if ((preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $to_client)) && empty($no_spam1) && ($no_spam2 == 9) && ($email != "")) {
-			if (mail($to_client, $subject, $message, $headers)) {
-				echo '<p><b>Спасибо за заказ!</b></p>
-					<p>Подтверждение покупки отправлено на указанный Вами адрес электронной почты</p>';
-			} else {
-				echo 'К сожалению, при отправке сообщения возникла ошибка';
+			try {
+				if (!mail($to_client, $subject, $message, $headers)) {
+					throw new Exception('Не удалось отправить сообщение клиенту');
+				}
+			} catch (Exception $e) {
+				echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
 			}
+
+			echo '<p><b>Спасибо за заказ!</b></p>
+				<p>Подтверждение покупки отправлено на указанный Вами адрес электронной почты</p>';
+
 		} else {
 			echo 'К сожалению, форма заполнена неверно';
 		};
@@ -141,20 +167,7 @@ require('includes/mysql.inc.php');
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=UTF-8\r\n";
 
-	try {
-		if (!mail($to_admin, $subject, $message, $headers)) {
-			throw new Exception('При отправке сообщения возникла ошибка');
-		}
-	} catch (Exception $ex) {
-		//Create error log in the database
-		$user_id = $id ? $id : $new_id;
-
-		$get_order_id = "SELECT id FROM users WHERE email = '{$email}'";
-		$get_order_id_result = mysqli_query($dbConnect, $user_id);
-		list($order_id) = mysqli_fetch_array($get_order_id_result);
-
-		$error_log = $ex->getMessage();
-
-		$add_new_log = "INSERT INTO error_logs ('user_id', 'order_id', 'error_log') VALUES ('{$user_id}', '{$order_id}', '{$error_log}')";
-		mysqli_query($dbConnect, $add_new_user);
-	}
+	if (!mail($to_admin, $subject, $message, $headers)) {
+		$error = error_get_last();
+		save_log($id, $new_id, $email, $dbConnect, $error);
+	};
