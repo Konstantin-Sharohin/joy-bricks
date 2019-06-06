@@ -9,8 +9,14 @@ grunt.initConfig({
         ]
       },
       dist: {
-        src: ['css/*.css'],
-        dest: 'css/dest/styles.min.css'
+        files: [{
+          expand: true,     // Enable dynamic expansion.
+          cwd: 'css/src/',      // Src matches are relative to this path.
+          src: ['*.css'],
+          dest: 'css/dest/',   // Destination path prefix.
+          ext: '.min.css',   // Dest filepaths will have this extension.
+          extDot: 'first'   // Extensions in filenames begin after the second dot
+        }]
       }
     },
 
@@ -20,34 +26,32 @@ grunt.initConfig({
       },
       dist: {
         files: [{
-          expand: true,     // Enable dynamic expansion.
-          cwd: 'js/src/',      // Src matches are relative to this path.
+          expand: true,
+          cwd: 'js/src/',
           src: ['*.js'],
-          dest: 'js/dest/',   // Destination path prefix.
-          ext: '.js',   // Dest filepaths will have this extension.
-          extDot: 'first'   // Extensions in filenames begin after the first dot
+          dest: 'js/dest/babelified/',
+          ext: '.js',
+          extDot: 'first'
         }]
       }
     },
 
     jshint: {
-      files: ['js/dest/*.js']
+      files: ['js/src/*.js']
     },
 
     uglify: {
         options: {
-          mangle: true,
-          sourceMap: true,
-          sourceMapName: 'js/dest/sourcemap.map'
+          sourceMap: true
         },
         dist: {
           files: [{
-            expand: true,     // Enable dynamic expansion.
-            cwd: 'js/dest/',      // Src matches are relative to this path.
+            expand: true,
+            cwd: 'js/dest/babelified',
             src: ['*.js'],
-            dest: 'js/dest/ugly/',   // Destination path prefix.
-            ext: '.js',   // Dest filepaths will have this extension.
-            extDot: 'first'   // Extensions in filenames begin after the first dot
+            dest: 'js/dest/ugly/',
+            ext: '.js',
+            extDot: 'first'
           }]
         }
     }

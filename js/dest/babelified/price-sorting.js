@@ -24,9 +24,8 @@
         current_action = 1;
       } else if (selectedButtonClass == "fas fa-sort-amount-down" || selectedButtonClass == "filter-symbol-dsc" || selectedButtonClass == "price-dsc") {
         current_action = 0;
-      }
+      } //Sending request
 
-      ; //Sending request
 
       var request = new XMLHttpRequest();
       request.open("GET", "price-filter.php?price-sort=".concat(current_action, "&price-range=").concat(slider_value));
@@ -39,8 +38,6 @@
           joyBricks.addToCart();
           joyBricks.scroller();
         }
-
-        ;
       };
 
       request.send();

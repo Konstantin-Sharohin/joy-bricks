@@ -54,9 +54,9 @@
 	</button>
 
 </main>
-<script src="js/return-top-btn.js"></script>
-<script src="js/create-cart-page.js"></script>
-<script src="js/cart-page-functionality.js"></script>
+<script src="js/dest/ugly/return-top-btn.js"></script>
+<script src="js/dest/ugly/create-cart-page.js"></script>
+<script src="js/dest/ugly/cart-page-functionality.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

@@ -14,21 +14,24 @@
 
     var filter_btn_display = function filter_btn_display() {
       return filters_div.style.display = document.body.scrollTop > 450 || document.documentElement.scrollTop > 450 ? "block" : "none";
-    },
-        price_range_show = function price_range_show(event) {
+    };
+
+    var price_range_show = function price_range_show(event) {
       if (event.target.className == "price-filter" || event.target.className == "filter-symbol" || event.target.className == "fas fa-filter") {
         price_range_div.style.width = price_range_div.style.width == "220px" ? "0px" : "220px";
         price_range_div.style.visibility = price_range_div.style.visibility == "visible" ? "hidden" : "visible";
         price_range_div.style.padding = price_range_div.style.width > "0px" ? "0.5em" : "0px";
         filter_output.style.width = price_range_div.style.visibility == "visible" ? "80px" : "0px";
       }
-    },
-        //Price filter calculation
-    filter_calculation = function filter_calculation() {
+    }; //Price filter calculation
+
+
+    var filter_calculation = function filter_calculation() {
       filter_output.innerHTML = this.value;
-    },
-        //AJAX Request
-    send_request = function send_request() {
+    }; //AJAX Request
+
+
+    var send_request = function send_request() {
       var request = new XMLHttpRequest();
       request.open("GET", "price-filter.php?price-range=" + slider.value);
 
@@ -40,8 +43,6 @@
           joyBricks.addToCart();
           joyBricks.scroller();
         }
-
-        ;
       };
 
       request.send();

@@ -20,7 +20,8 @@
                 result.innerHTML = request.responseText;
                 setTimeout(() => result.style.visibility = "hidden", 3000);
             }
-        }
+        };
+
         request.send(formData);
     }
-}())
+}());

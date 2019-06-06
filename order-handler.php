@@ -32,7 +32,7 @@ require('includes/mysql.inc.php');
 	  					<th>Итого</th>
   					</tr>
 					<tr>
-	  					<td>' . $cart_total_price[0] . '</td>
+	  					<td>' . $cart_total_price . '</td>
  					</tr>
 				</table>';
 		$text .=  '	<tr>
@@ -88,11 +88,12 @@ require('includes/mysql.inc.php');
 		$add_order = "INSERT INTO orders (user_id, title, code, price, quantity, payment_amount) VALUES ";
 
 		foreach ($order as $key => $values) {
-			if (current($order) == end($order)) {
+			if ($order[$key] === $order[array_key_last($order)]) {
 				$add_order .= "('$id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}')";
 			} else {
 				$add_order .= "('$id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}'), ";
 			}
+
 		}
 
 		$add_order_query_result = mysqli_query($dbConnect, $add_order);
@@ -121,7 +122,7 @@ require('includes/mysql.inc.php');
 		$add_new_order = "INSERT INTO orders (user_id, title, code, price, quantity, payment_amount) VALUES ";
 
 			foreach ($order as $key => $values) {
-				if (current($order) == end($order)) {
+				if ($order[$key] === $order[array_key_last($order)]) {
 					$add_new_order .= "('$new_id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}')";
 				} else {
 					$add_new_order .= "('$new_id', '{$values['title']}', '{$values['code']}', '{$values['price']}', '{$values['quantity']}', '{$cart_total_price}'), ";
@@ -152,11 +153,15 @@ require('includes/mysql.inc.php');
 				echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
 			}
 
-			echo '<p><b>Спасибо за заказ!</b></p>
-				<p>Подтверждение покупки отправлено на указанный Вами адрес электронной почты</p>';
+			echo '<div class="order-server-reply">
+						<p><b>Спасибо за заказ!</b></p>
+						<p>Подтверждение покупки отправлено на указанный Вами адрес электронной почты</p>
+				</div>';
 
 		} else {
-			echo 'К сожалению, форма заполнена неверно';
+			echo '<div class="order-server-reply"
+						<p><b>К сожалению, форма заполнена неверно</b></p>
+				</div>';
 		};
 
 	//Sending mail to admin

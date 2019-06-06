@@ -1,2 +1,2 @@
 "use strict";!function(t){var e=t.joyBricks||{};e.scroller=function(){var e=document.querySelector(".return-to-top-btn"),o=document.querySelector(".price-range");document.addEventListener?(t.addEventListener("scroll",function(){e.style.display=850<document.body.scrollTop||850<document.documentElement.scrollTop?"block":"none"}),e.addEventListener("click",function(){t.scrollTo({top:0,behavior:"smooth"}),o.style.width="0px",o.style.visibility="hidden",o.style.padding="0px"})):console.log("Method 'addEventListener' cannot be applied")},e.scroller(),t.joyBricks=e}(window);
-//# sourceMappingURL=../sourcemap.map
+//# sourceMappingURL=return-top-btn.js.map

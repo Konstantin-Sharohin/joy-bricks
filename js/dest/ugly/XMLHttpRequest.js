@@ -1,2 +1,0 @@
-"use strict";document.querySelector(".cart-icon").addEventListener("click",function(e){e.preventDefault();var t=new XMLHttpRequest;t.open("GET","http://localhost/joy-bricks/cart.php"),t.onreadystatechange=function(){4==t.readyState&&200==t.status&&(document.documentElement.innerHTML=t.responseText)},t.send()});
-//# sourceMappingURL=../sourcemap.map

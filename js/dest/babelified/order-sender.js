@@ -19,15 +19,15 @@
 
     request.onreadystatechange = function () {
       if (request.readyState == 4 && request.status == 200) {
-        /* window.localStorage.clear();
+        window.localStorage.clear();
         result.innerHTML = request.responseText;
-        setTimeout(() => document.location.replace("http://localhost/joy-bricks/index.php"), 5000); */
+        setTimeout(function () {
+          return document.location.replace("http://localhost/joy-bricks/index.php");
+        }, 5000);
       }
     };
 
     request.send(formData);
   }
-
-  ;
 })();
 //# sourceMappingURL=order-sender.js.map

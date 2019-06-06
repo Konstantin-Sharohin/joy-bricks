@@ -28,17 +28,10 @@
           if (all_items[i].title == cart_array[j].title) {
             all_cart_icons[i].dataset.quantity = cart_array[j].quantity;
           }
-
-          ;
         }
-
-        ;
       }
+    } //creating item object & setting properties in the markup
 
-      ;
-    }
-
-    ; //creating item object & setting properties in the markup
 
     function action(event) {
       var selectedIconClass = event.target.className,
@@ -47,7 +40,7 @@
           current_item_container = target.parentNode.parentNode.parentNode;
 
       if (selectedIconClass == "fas fa-cart-arrow-down") {
-        current_item = {
+        var current_item = {
           "title": current_item_container.querySelector('a').getAttribute('title'),
           "photo": current_item_container.querySelector('img').getAttribute('src'),
           "price": current_item_container.querySelector('.item-price').textContent,
@@ -65,14 +58,8 @@
               has_title = true;
               current_item.quantity = cart_array[_i].quantity;
             }
-
-            ;
           }
-
-          ;
         }
-
-        ;
 
         if (has_title == false) {
           current_item.quantity++;
@@ -83,14 +70,8 @@
           window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
           window.localStorage.setItem("cart_counter", counter);
         }
-
-        ;
       }
-
-      ;
     }
-
-    ;
   };
 
   joyBricks.addToCart();

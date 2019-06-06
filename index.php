@@ -107,10 +107,10 @@ include('includes/login.inc.php');
 					</div>
 			</div>
 	</section>
-	<script src="js/return-top-btn.js"></script>
-	<script src="js/add-to-cart.js"></script>
-	<script src="js/price-filter.js"></script>
-	<script src="js/price-sorting.js"></script>
+	<script src="js/dest/ugly/return-top-btn.js"></script>
+	<script src="js/dest/ugly/add-to-cart.js"></script>
+	<script src="js/dest/ugly/price-filter.js"></script>
+	<script src="js/dest/ugly/price-sorting.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

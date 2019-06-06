@@ -39,8 +39,8 @@
 		</span>
 	</button>;
 </main>
-<script src="js/cart-summary.js"></script>
-<script src="js/order-sender.js"></script>
+<script src="js/dest/ugly/cart-summary.js"></script>
+<script src="js/dest/ugly/order-sender.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

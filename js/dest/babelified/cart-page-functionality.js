@@ -24,19 +24,17 @@
         return params.total_price;
       }
 
-      ;
       var row_nodeList_length = row_nodeList.length,
           i = 0,
           total_price = 0;
 
       for (i; i < row_nodeList_length; i++) {
-        row_item_price = parseInt(row_nodeList[i].querySelector(".item-price").textContent);
-        row_quantity = parseInt(row_nodeList[i].querySelector(".item-quantity").textContent);
-        row_total_price = row_item_price * row_quantity;
+        var row_item_price = parseInt(row_nodeList[i].querySelector(".item-price").textContent),
+            row_quantity = parseInt(row_nodeList[i].querySelector(".item-quantity").textContent),
+            row_total_price = row_item_price * row_quantity;
         total_price += row_total_price;
       }
 
-      ;
       params.total_price = total_price;
     };
 
@@ -55,7 +53,7 @@
       create_item_object(params);
       calculate_rows(params);
       items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
-      counter = params.total_quantity;
+      var counter = params.total_quantity;
       var item_index = cart_array.findIndex(function (i) {
         return i.title == params.current_item.title;
       });
@@ -119,14 +117,11 @@
           show_empty_cart();
         }
 
-        ;
         counter = params.total_quantity;
         window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
         window.localStorage.setItem("cart_counter", counter);
         window.localStorage.setItem("cart_total_price", params.total_price);
       }
-
-      ;
     };
 
     var cart_page_container = document.querySelector(".cart-page-container"),
@@ -143,7 +138,5 @@
     ;
     ;
   }
-
-  ;
 })();
 //# sourceMappingURL=cart-page-functionality.js.map

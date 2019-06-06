@@ -43,7 +43,6 @@
       cart_total_price += parseInt(cart_array[i].price) * cart_array[i].quantity;
     }
 
-    ;
     window.localStorage.setItem("cart_total_price", cart_total_price);
     var cell_total = document.createElement("div");
     cell_total.classList.add("cell");
@@ -51,7 +50,5 @@
     cell_total.innerHTML = cart_total_price + ' грн';
     cart_table_row_total.appendChild(cell_total);
   }
-
-  ;
 })();
 //# sourceMappingURL=create-cart-page.js.map

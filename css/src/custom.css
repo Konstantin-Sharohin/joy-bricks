@@ -22,7 +22,7 @@
 
   /* HEADER START */
   .header-image-container {
-    background-image: url("../images/main-image-3.jpeg");
+    background-image: url("../../images/main-image-3.jpeg");
     min-height: 500px;
     background-attachment: fixed;
     background-position: center;
@@ -1298,6 +1298,11 @@
     display: flex;
     justify-content: space-between;
     margin: 1em;
+  }
+
+  .order-server-reply {
+    margin: 3em auto 3em;
+    color: #2aa82a;
   }
   /* ORDER CART SUBMIT END */
 

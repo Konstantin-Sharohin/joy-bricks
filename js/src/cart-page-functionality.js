@@ -12,7 +12,7 @@
         } else console.log("Method 'addEventListener' cannot be applied");
 
 //declaring functions for "empty cart", "row calculation", "order item object" and "update_save" (in order to avoid repetitions below)
-        function show_empty_cart() {
+            function show_empty_cart() {
             cart_page_inner_container.classList.add("deletion-animation");
             setTimeout(() => cart_page_inner_container.remove(), 1000);
             const note = document.createElement("p");
@@ -22,35 +22,35 @@
         };
 
 
-        function calculate_rows(params) {
-        const row_nodeList = items_container.querySelectorAll(".row.items");
+        function  calculate_rows(params) {
+            const row_nodeList = items_container.querySelectorAll(".row.items");
             if (row_nodeList.length == 0) {
                 params.total_price =  0;
                 return params.total_price;
-            };
+            }
 
         let row_nodeList_length = row_nodeList.length,
             i = 0,
             total_price = 0;
             for (i; i < row_nodeList_length; i++) {
-                row_item_price = parseInt(row_nodeList[i].querySelector(".item-price").textContent);
-                row_quantity = parseInt(row_nodeList[i].querySelector(".item-quantity").textContent);
+               let row_item_price = parseInt(row_nodeList[i].querySelector(".item-price").textContent),
+                row_quantity = parseInt(row_nodeList[i].querySelector(".item-quantity").textContent),
                 row_total_price = row_item_price * row_quantity;
                 total_price += row_total_price;
-            };
+            }
             params.total_price = total_price;
         };
 
 
         function create_item_object(params) {
-        const current_item = {
-            "title": params.current_button_container.querySelector('.cell:first-child').getAttribute('title'),
-            "photo": params.current_button_container.querySelector('.cart-page-item-img').getAttribute('src'),
-            "price": params.current_button_container.querySelector('.cart-page-item-price').textContent,
-            "code": params.current_button_container.querySelector('.cart-page-item-code').textContent,
-            "quantity": params.current_item_quantity
-            };
-        params.current_item = current_item;
+            const current_item = {
+                "title": params.current_button_container.querySelector('.cell:first-child').getAttribute('title'),
+                "photo": params.current_button_container.querySelector('.cart-page-item-img').getAttribute('src'),
+                "price": params.current_button_container.querySelector('.cart-page-item-price').textContent,
+                "code": params.current_button_container.querySelector('.cart-page-item-code').textContent,
+                "quantity": params.current_item_quantity
+                };
+            params.current_item = current_item;
         };
 
 
@@ -58,7 +58,7 @@
             create_item_object(params);
             calculate_rows(params);
             items_container.querySelector(".row.total-row div:last-child").textContent = params.total_price + ' грн';
-            counter = params.total_quantity;
+            let counter = params.total_quantity;
 
         let item_index = cart_array.findIndex(i => i.title == params.current_item.title);
             cart_array.splice(item_index, 1, params.current_item);
@@ -118,7 +118,7 @@
 
                     params.current_button_container.classList.add("deletion-animation");
                     //setTimeout(() => current_button_container.remove(), 1000);
-                    current_button_container.remove()
+                    current_button_container.remove();
 
                     calculate_rows(params);
 
@@ -129,14 +129,14 @@
 
                     if (cart_array.length == 0) {
                         show_empty_cart();
-                    };
+                    }
 
                     counter = params.total_quantity;
 
                     window.localStorage.setItem("filled_cart", JSON.stringify(cart_array));
                     window.localStorage.setItem("cart_counter", counter);
                     window.localStorage.setItem("cart_total_price", params.total_price);
-                };
+                }
             };
-    };
+    }
 }());

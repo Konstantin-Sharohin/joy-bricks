@@ -25,7 +25,7 @@
                     current_action = 1;
                 } else if (selectedButtonClass == "fas fa-sort-amount-down" || selectedButtonClass == "filter-symbol-dsc" || selectedButtonClass == "price-dsc") {
                     current_action = 0;
-                };
+                }
 
             //Sending request
             const request = new XMLHttpRequest();
@@ -38,7 +38,7 @@
                         joyBricks.priceFilter();
                         joyBricks.addToCart();
                         joyBricks.scroller();
-                    };
+                    }
                 };
                 request.send();
             };

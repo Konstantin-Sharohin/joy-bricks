@@ -13,22 +13,22 @@
         filter_output.innerHTML = slider.value;
 
         //Visibility
-        const filter_btn_display = () => filters_div.style.display = (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) ? "block" : "none",
+        const filter_btn_display = () => filters_div.style.display = (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) ? "block" : "none";
 
-        price_range_show = event => {
+        const price_range_show = event => {
             if (event.target.className == "price-filter" || event.target.className == "filter-symbol" || event.target.className == "fas fa-filter") {
                 price_range_div.style.width = price_range_div.style.width == "220px" ? "0px" : "220px";
                 price_range_div.style.visibility = price_range_div.style.visibility == "visible" ? "hidden" : "visible";
                 price_range_div.style.padding = price_range_div.style.width > "0px" ? "0.5em" : "0px";
                 filter_output.style.width = price_range_div.style.visibility == "visible" ? "80px" : "0px";
             }
-        },
+        };
 
             //Price filter calculation
-        filter_calculation = function () { filter_output.innerHTML = this.value },
+        const filter_calculation = function () { filter_output.innerHTML = this.value };
 
             //AJAX Request
-        send_request = () => {
+        const send_request = () => {
             const request = new XMLHttpRequest();
 
             request.open("GET", "price-filter.php?price-range=" + slider.value);
@@ -39,7 +39,7 @@
                     joyBricks.priceSorting();
                     joyBricks.addToCart();
                     joyBricks.scroller();
-                };
+                }
             };
             request.send();
         };

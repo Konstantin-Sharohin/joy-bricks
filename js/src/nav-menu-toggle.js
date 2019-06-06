@@ -6,7 +6,7 @@
             toggle = (event) => {
                 event.preventDefault();
                 for (let i = 0; i < navElements.length; i++) {
-                    navElements[i].classList.toggle("responsive")
+                    navElements[i].classList.toggle("responsive");
                 }
                 icon.className = icon.className == "fas fa-angle-down" ? "fas fa-angle-up" : "fas fa-angle-down";
             };

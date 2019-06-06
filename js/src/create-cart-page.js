@@ -66,7 +66,7 @@
                 table_row.appendChild(cell_price);
                 cart_table.insertBefore(table_row, total_header);
                 cart_total_price += parseInt(cart_array[i].price) * cart_array[i].quantity;
-            };
+            }
 
             window.localStorage.setItem("cart_total_price", cart_total_price);
 
@@ -75,5 +75,5 @@
             cell_total.dataset.title = "Итого";
             cell_total.innerHTML = cart_total_price + ' грн';
             cart_table_row_total.appendChild(cell_total);
-    };
+    }
 })();
