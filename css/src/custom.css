@@ -21,6 +21,15 @@
 
 
   /* HEADER START */
+  .banner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    font-style: italic;
+    color: rgba(245, 245, 220, 0.651);
+  }
+
   .header-image-container {
     background-image: url("../../images/main-image-3.jpeg");
     min-height: 500px;
