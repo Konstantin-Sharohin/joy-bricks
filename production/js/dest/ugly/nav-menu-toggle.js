@@ -1,0 +1,2 @@
+"use strict";!function(){if(document.addEventListener){var e=document.querySelector(".toggle-icon"),t=document.querySelector(".toggle-icon i"),a=document.querySelectorAll(".nav-element-link, .cart-icon");e.addEventListener("click",function(e){e.preventDefault();for(var n=0;n<a.length;n++)a[n].classList.toggle("responsive");t.className="fas fa-angle-down"==t.className?"fas fa-angle-up":"fas fa-angle-down"})}else console.log("Method 'addEventListener' cannot be applied")}();
+//# sourceMappingURL=nav-menu-toggle.js.map

@@ -22,7 +22,7 @@
         window.localStorage.clear();
         result.innerHTML = request.responseText;
         setTimeout(function () {
-          return document.location.replace("http://localhost/joy-bricks/index.php");
+          return document.location.replace("index.php");
         }, 5000);
       }
     };

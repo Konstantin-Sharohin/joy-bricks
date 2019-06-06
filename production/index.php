@@ -2,7 +2,6 @@
 	require 'includes/mysql.inc.php';
 	require 'includes/header.html';
 ?>
-
 <main class="main-container">
 	<aside class="categories">
 		<div class="categories-container">
