@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>
+		<?php
+		if (isset($page_title)) {
+			echo $page_title;
+		} else {
+			echo 'Joy Bricks';
+		}
+	?>
+	</title>
+	<link rel="apple-touch-icon" sizes="57x57" href="../assets/favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="../assets/favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../assets/favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="../assets/favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../assets/favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="../assets/favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="../assets/favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="../assets/favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="36x36" href="../assets/favicons/android-icon-36x36.png">
+	<link rel="icon" type="image/png" sizes="48x48" href="../assets/favicons/android-icon-48x48.png">
+	<link rel="icon" type="image/png" sizes="72x72" href="../assets/favicons/android-icon-72x72.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicons/android-icon-96x96.png">
+	<link rel="icon" type="image/png" sizes="144x144" href="../assets/favicons/android-icon-144x144.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="../assets/favicons/ms-icon-144x144.png">
+	<meta name="theme-color" content="#4285f4">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link href="../assets/css/dest/custom.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
+</head>
+
+<body>
+	<div class="languages">
+		<a class="english" href="http://localhost/joy-bricks/en">EN</a>
+		<a class="russian" href="http://localhost/joy-bricks/ru">RU</a>
+	</div>
+	<div class="banner">Магазин работает в тестовом режиме</div>
+	<div class="header-image-container"></div>
+	<nav class="navbar">
+		<?php
+		if (!isset($_SESSION['user_id'])) {
+			$pages = [
+					'Joy&nbsp;Bricks' => ['index.php', '<img src="../assets/images/dest/bricks.png" id="navbar-logo">'],
+					'История' => ['history.php', '<span class="nav-symbol history"><i class="fas fa-book"></i></span>'],
+					'Контакты' => ['contacts.php', '<span class="nav-symbol contacts"><i class="fas fa-envelope"></i></span>'],
+					'Оплата/Доставка' => ['delivery-payment.php', '<span class="nav-symbol delivery"><i class="fas fa-shipping-fast"></i></span>']
+					/*'Регистрация' => ['register.php'],
+					'Авторизация' => ['login.php']*/
+					];
+		} else {
+			$pages = [
+			'Joy&nbsp;Bricks' => ['index.php', '<img src="../assets/images/dest/bricks.png" id="navbar-logo">'],
+			'История' => ['history.php', '<span class="nav-symbol history"><i class="fas fa-book"></i></span>'],
+			'Контакты' => ['contacts.php', '<span class="nav-symbol contacts"><i class="fas fa-envelope"></i></span>'],
+			'Доставка и оплата' => ['delivery-payment.php', '<span class="nav-symbol delivery"><i class="fas fa-shipping-fast"></i></span>']
+			];
+		}
+
+		$this_page = basename($_SERVER['PHP_SELF']);
+		$class_inactive = '" class="nav-element-link"';
+		$class_active = '" class="nav-element-link active"';
+		foreach ($pages as $key => $values) {
+			if ($this_page == $values[0]) {
+				echo '<a href="' . $values[0] . "$class_active";
+			} else {
+				echo '<a href="' . $values[0] . "$class_inactive";
+			};
+			echo '>' . $values[1] . '<span class="nav-link-title">' . $key . '</span></a>';
+		}
+
+			/*if (isset($_SESSION['user_id'])) {
+			echo '<li class="dropdown">
+						<a href="#" class="dropdown">Учетная запись</a>
+						<ul class="dropdown-menu">
+							<li><a href="../assets/images/dest/logout.php">Выход</a></li>
+							<li><a href="../assets/images/dest/change_password.php">Изменить пароль</a></li>
+						</ul>
+				</li>';
+			}*/
+		?>
+		<a href="#" class="toggle-icon" id="switcher">
+			<i class="fas fa-angle-down"></i>
+		</a>
+		<?php
+		if ((basename($_SERVER['PHP_SELF'])) != 'cart.php' && (basename($_SERVER['PHP_SELF'])) != 'order-form.php') {
+			echo '<a href="cart.php" class="cart-icon">
+				<span class="cart-symbol" data-counter="0">
+					<i class="fas fa-cart-arrow-down"></i>
+				</span>
+			</a>';
+		}
+		?>
+	</nav>
