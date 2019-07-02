@@ -31,18 +31,18 @@ CREATE TABLE `en_products` (
 ALTER TABLE en_products AUTO_INCREMENT=13;
 
 INSERT INTO `en_products` (`id`, `category_id`, `title`, `category`, `type`, `description`, `photo`, `price`, `quantity`, `code`) VALUES
-(1, 3, 'Aztek&nbsp;Prison', 'BRICK', 'Pirates', '<b>Детский конструктор на 328 parts.</b><br>Immerse yourself in the past of the Aztec civilization.', '47970f1190b86bdb3010cdef348ff376602dd287', 211, 3, 1720),
-(2, 3, 'Fire&nbsp;Rescue', 'BRICK', 'Fire brigade', '<b>Детский конструктор на 364 parts.</b><br>Do not give a fire a single chance.', 'bbd76f501b989ab52b437ee0a1466f3e655eb4db', 244, 2, 1721),
-(3, 3, 'Submarine', 'BRICK', 'Navy', '<b>Детский конструктор на 382 parts.</b><br>Explore the unknown depths of the ocean.', 'dae9b8a071f1888a328382bbcfecc556c9bca3ef', 333, 3, 1722),
-(4, 4, 'Urban&nbsp;Police', 'BELA', 'Police', '<b>Детский конструктор на 528 parts.</b><br>Do not let bank robbers go.', 'e12fdaa84bf8457d9fe3166ced42516d96ed70b1', 801, 2, 1723),
-(5, 4, 'City&nbsp;Police', 'BELA', 'Police', '<b>Детский конструктор на 691 parts.</b><br>Manage a police checkpoint.', 'd3f44712ef306d1a60271afd11cafbebc41b4ee3', 804, 1, 1724),
-(6, 4, 'My&nbsp;World', 'BELA', 'Minecraft', '<b>Детский конструктор на 747 parts.</b><br>Create your own story.', '3361148773fa1105c4e8fb51d168f4fa69a47876', 900, 2, 1725),
-(7, 2, 'Aviation', 'SLUBAN', 'Aviation', '<b>Детский конструктор на 259 parts.</b><br>Fly a passenger helicopter.', 'ef92ea0e975882944cbfb0fb2cb774a7676ed331', 247, 1, 1726),
-(8, 2, 'Town&nbsp;Farm', 'SLUBAN', 'Farm', '<b>Детский конструктор на 512 parts.</b><br>Manage your personal farm.', '404f9bb6723076ace03b5a4e83514a2e4403d103', 588, 1, 1727),
-(9, 2, 'Town&nbsp;Shop', 'SLUBAN', 'Shop', '<b>Детский конструктор на 149 parts.</b><br>Manage your personal store.', '0f899c5dbb6d54657a5ab0019589c5ffcfcd4643', 205, 1, 1728),
-(10, 1, 'Superheroes<br>School', 'LEPIN', 'Superhero School', '<b>Детский конструктор на 712 parts.</b><br>Build your school for superheroes.', 'ef13d8c429b062731aad107a47916386a7a5c3ad', 1291, 1, 1729),
-(11, 1, 'Ninja&nbsp;Saga', 'LEPIN', 'Tanks', '<b>Детский конструктор на 977 parts.</b><br>Build an ice tank and arrange a snow apocalypse.', 'bad756b795c07cb173b3191ca818a23d1f787fcb', 1171, 1, 1730),
-(12, 1, 'Ninja&nbsp;Saga', 'LEPIN', 'Robots', '<b>Детский конструктор на 1010 parts.</b><br>Build fiery fur and go for a barbecue.', 'e5f2a3389d320fab9d782dee8885d8d56e40a83b', 1133, 1, 1731);
+(1, 3, 'Aztek&nbsp;Prison', 'BRICK', 'Pirates', '<b>Tinker toy with 328 parts.</b><br>Immerse yourself in the past of the Aztec civilization.', '47970f1190b86bdb3010cdef348ff376602dd287', 211, 3, 1720),
+(2, 3, 'Fire&nbsp;Rescue', 'BRICK', 'Fire brigade', '<b>Tinker toy with 364 parts.</b><br>Do not give a fire a single chance.', 'bbd76f501b989ab52b437ee0a1466f3e655eb4db', 244, 2, 1721),
+(3, 3, 'Submarine', 'BRICK', 'Navy', '<b>Tinker toy with 382 parts.</b><br>Explore the unknown depths of the ocean.', 'dae9b8a071f1888a328382bbcfecc556c9bca3ef', 333, 3, 1722),
+(4, 4, 'Urban&nbsp;Police', 'BELA', 'Police', '<b>Tinker toy with 528 parts.</b><br>Do not let bank robbers go.', 'e12fdaa84bf8457d9fe3166ced42516d96ed70b1', 801, 2, 1723),
+(5, 4, 'City&nbsp;Police', 'BELA', 'Police', '<b>Tinker toy with 691 parts.</b><br>Manage a police checkpoint.', 'd3f44712ef306d1a60271afd11cafbebc41b4ee3', 804, 1, 1724),
+(6, 4, 'My&nbsp;World', 'BELA', 'Minecraft', '<b>Tinker toy with 747 parts.</b><br>Create your own story.', '3361148773fa1105c4e8fb51d168f4fa69a47876', 900, 2, 1725),
+(7, 2, 'Aviation', 'SLUBAN', 'Aviation', '<b>Tinker toy with 259 parts.</b><br>Fly a passenger helicopter.', 'ef92ea0e975882944cbfb0fb2cb774a7676ed331', 247, 1, 1726),
+(8, 2, 'Town&nbsp;Farm', 'SLUBAN', 'Farm', '<b>Tinker toy with 512 parts.</b><br>Manage your personal farm.', '404f9bb6723076ace03b5a4e83514a2e4403d103', 588, 1, 1727),
+(9, 2, 'Town&nbsp;Shop', 'SLUBAN', 'Shop', '<b>Tinker toy with 149 parts.</b><br>Manage your personal store.', '0f899c5dbb6d54657a5ab0019589c5ffcfcd4643', 205, 1, 1728),
+(10, 1, 'Superheroes<br>School', 'LEPIN', 'Superhero School', '<b>Tinker toy with 712 parts.</b><br>Build your school for superheroes.', 'ef13d8c429b062731aad107a47916386a7a5c3ad', 1291, 1, 1729),
+(11, 1, 'Ninja&nbsp;Saga', 'LEPIN', 'Tanks', '<b>Tinker toy with 977 parts.</b><br>Build an ice tank and arrange a snow apocalypse.', 'bad756b795c07cb173b3191ca818a23d1f787fcb', 1171, 1, 1730),
+(12, 1, 'Ninja&nbsp;Saga', 'LEPIN', 'Robots', '<b>Tinker toy with 1010 parts.</b><br>Build fiery fur and go for a barbecue.', 'e5f2a3389d320fab9d782dee8885d8d56e40a83b', 1133, 1, 1731);
 
 
 
