@@ -78,6 +78,7 @@
 	</section>
 	<script src="js/dest/ugly/return-top-btn.js"></script>
 	<script src="js/dest/ugly/add-to-cart.js"></script>
+	<script src="js/dest/ugly/reset-local-storage.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

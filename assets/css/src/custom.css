@@ -35,11 +35,39 @@
     top: 10px;
     left: 10px;
     font-size: 1.2em;
-    color: rgba(74, 163, 47, 0.5);
   }
 
-  .header-image-container {
-    background-image: url("../../images/dest/main-image-3.jpeg");
+  .english, .russian {
+    font-weight: bold;
+    padding: 0em .4em;
+    text-decoration: none;
+  }
+
+  .english:hover, .russian:hover {
+    background-color: rgba(119, 167, 159, 0.651);
+    transition-duration: .1s;
+    border-radius: 10px;
+  }
+
+  .english {
+    color: #dc143c;
+  }
+
+  .russian {
+    color: #1e90ff;
+  }
+
+  .header-image-container-ru {
+    background-image: url("../../images/dest/main-ru.jpeg");
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .header-image-container-en {
+    background-image: url("../../images/dest/main-en.jpg");
     min-height: 500px;
     background-attachment: fixed;
     background-position: center;
@@ -1416,7 +1444,7 @@
     background-size: 60%;
     position: absolute;
     top: -2px;
-    left: 132px;
+    left: 142px;
     width: 150px;
     height: 35px;
   }
@@ -1426,7 +1454,7 @@
     background-size: 70%;
     position: absolute;
     top: -5px;
-    left: 37px;
+    left: 47px;
     width: 150px;
     height: 35px;
   }

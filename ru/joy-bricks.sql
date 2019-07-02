@@ -1,15 +1,15 @@
 CREATE DATABASE joy_bricks;
 
-CREATE TABLE `categories` (
+CREATE TABLE `ru_categories` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `category` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `category_UNIQUE` (`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE categories AUTO_INCREMENT=5;
+ALTER TABLE ru_categories AUTO_INCREMENT=5;
 
-INSERT INTO `categories` (`id`, `category`) VALUES
+INSERT INTO `ru_categories` (`id`, `category`) VALUES
 (4, 'BELA'),
 (3, 'BRICK'),
 (1, 'LEPIN'),
@@ -17,7 +17,7 @@ INSERT INTO `categories` (`id`, `category`) VALUES
 
 
 
-CREATE TABLE `products` (
+CREATE TABLE `ru_products` (
   `id` int(10) UNSIGNED NOT NULL,
   `category_id` smallint(5) UNSIGNED NOT NULL,
   `title` varchar(45) NOT NULL,
@@ -29,9 +29,9 @@ CREATE TABLE `products` (
   `quantity` int(10) UNSIGNED NOT NULL,
   `code` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-ALTER TABLE products AUTO_INCREMENT=13;
+ALTER TABLE ru_products AUTO_INCREMENT=13;
 
-INSERT INTO `products` (`id`, `category_id`, `title`, `category`, `type`, `description`, `photo`, `price`, `quantity`, `code`) VALUES
+INSERT INTO `ru_products` (`id`, `category_id`, `title`, `category`, `type`, `description`, `photo`, `price`, `quantity`, `code`) VALUES
 (1, 3, 'Aztek&nbsp;Prison', 'BRICK', 'Пираты', '<b>Детский конструктор на 328 деталей.</b><br>Окунитесь в прошлое цивилизации Ацтеков.', '47970f1190b86bdb3010cdef348ff376602dd287', 211, 3, 1720),
 (2, 3, 'Fire&nbsp;Rescue', 'BRICK', 'Пожарная охрана', '<b>Детский конструктор на 364 детали.</b><br>Не дайте пожару ни единого шанса.', 'bbd76f501b989ab52b437ee0a1466f3e655eb4db', 244, 2, 1721),
 (3, 3, 'Submarine', 'BRICK', 'Морской флот', '<b>Детский конструктор на 382 детали.</b><br>Исследуйте неизвестные глубины океана.', 'dae9b8a071f1888a328382bbcfecc556c9bca3ef', 333, 3, 1722),
@@ -47,7 +47,7 @@ INSERT INTO `products` (`id`, `category_id`, `title`, `category`, `type`, `descr
 
 
 
-CREATE TABLE `users` (
+CREATE TABLE `ru_users` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`type` ENUM('member','admin') NOT NULL DEFAULT 'member',
 	`username` VARCHAR(45),
@@ -65,7 +65,7 @@ CREATE TABLE `users` (
 
 
 
-CREATE TABLE `orders` (
+CREATE TABLE `ru_orders` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`user_id` INT UNSIGNED NOT NULL,
 	`title` VARCHAR(45) NOT NULL,
@@ -77,11 +77,11 @@ CREATE TABLE `orders` (
 	PRIMARY KEY (`id`),
 	INDEX `date_created` (`date_created` ASC),
 		FOREIGN KEY (`user_id`)
-		REFERENCES `users` (`id`)
+		REFERENCES `ru_users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE `error_logs` (
+CREATE TABLE `ru_error_logs` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` INT UNSIGNED NOT NULL,
   `order_id` INT UNSIGNED NOT NULL,
@@ -89,6 +89,6 @@ CREATE TABLE `error_logs` (
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `date_created` (`date_created` ASC),
-  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
+  CONSTRAINT `ru_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `ru_users` (`id`),
+  CONSTRAINT `ru_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `ru_orders` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -99,6 +99,7 @@
 	<script src="js/dest/ugly/add-to-cart.js"></script>
 	<script src="js/dest/ugly/price-filter.js"></script>
 	<script src="js/dest/ugly/price-sorting.js"></script>
+	<script src="js/dest/ugly/reset-local-storage.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

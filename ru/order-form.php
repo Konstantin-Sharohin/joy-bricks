@@ -39,6 +39,7 @@
 </main>
 <script src="js/dest/ugly/cart-summary.js"></script>
 <script src="js/dest/ugly/order-sender.js"></script>
+<script src="js/dest/ugly/reset-local-storage.js"></script>
 <?php
 	include('includes/footer.html');
 ?>

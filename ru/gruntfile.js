@@ -11,9 +11,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,     // Enable dynamic expansion.
-          cwd: '../../assets/css/src/',      // Src matches are relative to this path.
+          cwd: '../assets/css/src/',      // Src matches are relative to this path.
           src: ['*.css'],
-          dest: 'css/dest/',   // Destination path prefix.
+          dest: '../assets/css/dest/',   // Destination path prefix.
           ext: '.min.css',   // Dest filepaths will have this extension.
           extDot: 'first'   // Extensions in filenames begin after the second dot
         }]
@@ -66,9 +66,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'images/',
+          cwd: '../assets/images/',
           src: ['**/*.{png,jpg,jpeg,gif}'],
-          dest: 'images/dest/'
+          dest: '../assets/images/dest/'
         }]
       }
     }

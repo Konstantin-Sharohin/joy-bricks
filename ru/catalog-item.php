@@ -44,7 +44,7 @@
 							<div class="catalog-single-item">
 								<a class="catalog-item-link" title="' . $title . '">
 									<div class="catalog-item-image">
-										<img src="..assets/images/dest/' . $photo . '.jpg" alt="catalog item" class="item-image">
+										<img src="../assets/images/dest/' . $photo . '.jpg" alt="catalog item" class="item-image">
 									</div>
 									<div class="catalog-item-price">
 										<span class="item-price">' . $price . ' грн</span>
@@ -78,6 +78,7 @@
 	</section>
 	<script src="js/dest/ugly/return-top-btn.js"></script>
 	<script src="js/dest/ugly/add-to-cart.js"></script>
+	<script src="js/dest/ugly/reset-local-storage.js"></script>
 </main>
 <?php
 	include 'includes/footer.html';

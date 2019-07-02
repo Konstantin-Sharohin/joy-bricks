@@ -53,6 +53,7 @@
 	</button>
 	<script src="js/dest/ugly/return-top-btn.js"></script>
 	<script src="js/dest/ugly/header-cart-initialisation.js"></script>
+	<script src="js/dest/ugly/reset-local-storage.js"></script>
 </main>
 <?php
 	include('includes/footer.html');
