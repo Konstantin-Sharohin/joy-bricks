@@ -82,7 +82,7 @@
     let languages = document.querySelector('.cart-summary-button-container'),
         returnButton = (event) => {
             if (event.target.className === 'cart-submit-btn return' || event.target.className === 'back-to-cart' || event.target.className === 'fas fa-arrow-left') {
-                document.location.assign('http://localhost/joy-bricks/en/cart.php');
+                document.location.assign('http://joy-bricks.co.ua/en/cart.php');
             }
         }
     languages.addEventListener('click', returnButton);
